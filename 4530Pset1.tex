@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 1}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{claim}{Claim}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prop}{Proposition}
+
+\begin{document}
+
+\problem{1.6.6} Let $A = \{1,2,\ldots, n\}$ and let $X = \{0,1\}$. Consider the map
+\begin{align*}
+f: \mathcal{P}(A) &\lra X^n \\
+B &\mapsto (x_1, x_2, \ldots, x_n)
+\end{align*} 
+Where $m \in B$ implies $x_m = 1$ and otherwise $x_m = 0$. This map is clearly injective because each set $B \subset A$ has less than or equal to $n$ elements, and therefore will get mapped onto the $n$-vector corresponding to its elements. Furthermore, $B_1$ and $B_2$ have the same image under $f$ means that if $f(B_1) = (x_1,\ldots, x_n)$ and $f(B_2) = (y_1,\ldots, y_n)$ then $x_k = y_k$ for all $k$. Hence, $B_1$ and $B_2$ have the same elements and are therefore equal. For surjectivity take $x = (x_1,\ldots,x_n)$ and let so $f^{-1}(x) = \{i : x_i = 1\}$. Hence, each $x$ has an inverse image and $f$ is surjective. Thus, $f$ is bijective. 
+
+%TODO Fill in equivalences
+\problem{1.7.5} 
+\problempart{a} The set $A = \{f \mathrel{|} f: \{0,1\} \to \Z_+\}$ is countable. Each function in $A$ is uniquely determined by the where it sends $0$ and $1$. There are only a countable number of possibilities for each one, and so we may think of $f$ as lying in $\Z_+ \times \Z_+$ as a 2-tuple $(f(0), f(1))$. This means that $A \subseteq \Z_+ \times \Z_+$ and because $\Z_+ \times \Z_+$ is a finite product of countable sets this gives that $A$ is a subset of a countable set and hence, countable. \\
+\problempart{b} The set $B = \{f \mathrel{|} f: \{1,2,\ldots, n\} \to \Z_+\}$ is also countable. The reasoning is the same as in {\bf (a)} except that now we may think of $f$ as lying in $\Z_+^n$ represented by $(f(1), f(2), \ldots, f(n))$, which is also a finite product of countable sets and thus, countable. So $B$ is also a subset of a countable set and therefore countable. \\
+\problempart{c} Let $C = \bigcup_{n\in \Z_+} B_n$. If $B_n$ is an at most countable set for each $n$ then $C$ is countable because it is the countable union of countable sets. If any of the $B_n$ is uncountable then so is $C$ because there is a natural injection $B_n \hookrightarrow C$ given by the identity on $B$ and so $|C| \geq |B_n|$.  \\
+\problempart{d} Let $D = \{f \mathrel{|} f: \Z_+ \to \Z_+\}$. I claim that $D$ is uncountable. We can think of each $f$ as an element of $\Z^\omega$ represented by $(f(1), f(2), \ldots)$. Note that if we set $X = \{0,1\}$ then $X^\omega \subset \Z^\omega \cong D$. Recall that $X^\omega$ is uncountable and because the identity on $X^\omega$ defines an injection into $\Z^\omega$ we have that $|D| = |\Z^\omega| \geq |X^\omega|$ and so $D$ is uncountable. (Note: we could also have just done the diagonalization directly on $D$)\\
+\problempart{e} If we take $E = \{f \mathrel{|} f:\Z_+ \to \{0,1\}\}$ and $X = \{0,1\}$ then we can think of each $f \in E$ as the vector $(f(1), f(2), \ldots) \in X^\omega$. As we saw in the book, $X^\omega$ is uncountable and hence so is $E$. \\
+\problempart{f} Let $F$ be the set of eventually zero functions $\Z_+ \to \{0,1\}$. More precisely, take $F = \{f \mathrel{|} \exists N > 0, \forall n>N, f(n) = 0\}$. Then $F$ breaks up naturally into pieces $F_n = \{g\mathrel{|} \forall m > n, g(m) = 0\}$ so that $F = \bigcup_{n = 1}^\infty F_n$. Now we observe that $F_n \cong \Z_+^n$. To see this observe that we can view $F_n$ as an $n$-tuple $(f(1), f(2), \ldots, f(n))$. This defines an injection $F_n \into \Z_+^n$ because if $f,g$ map to the same $n$-tuple, then $f(k) = g(k)$ for each $k \leq n$, and because $f,g \in F_n$ $f(m) = g(m)$ for every $m > n$. So $f(x) = g(x)$ for each $x$ and thus $f = g$. Furthermore, the mapping is surjective because for each $(y_1,\ldots, y_n)$ we can construct the function given by $f(k) = y_k$. This bijection verifies that $F_n \cong \Z_+^n$. Hence, 
+\[
+F = \bigcup_{n=1}^\infty F_n \cong \bigcup_{n=1}^\infty \Z_+^n
+\]
+$F$ is a countable union of countable sets and thus, countable.\\
+\problempart{g} In the same spirit as the previous part we set $G = \{f \mathrel{|} \exists N > 0, \forall n>N, f(n) = 1\}$. In the same way as before we can decompose $G$ into pieces $G_n$ such that $G_n = \{g\mathrel{|} \forall m > n, g(m) = 1\}$. The identification with the $n$-tuple $(g(1),g(2),\ldots, g(n))$ is a bijection (for the same reasons as in {\bf (f)}) and so we have that $G_n \cong \Z_+^n$. So we see that 
+\[
+G = \bigcup_{n=1}^\infty G_n \cong \bigcup_{n=1}^\infty \Z_+^n
+\]\\
+\problempart{h} It is clear from the preceding to parts that the set of functions which are eventually $k$ is countable. So if we take 
+\[
+H = \{f: \Z_+ \to \Z_+ \mathrel{|} \exists N,k \text{ such that } \forall n > N, f(n) = k\}
+\]
+We now will decompose $H$ into a union as we did before. We define
+\[
+H_{n,k} = \{g \suchthat \forall m > n g(m) = k\}
+\]
+then it is clear that 
+\[
+H = \bigcup_{n=1}^\infty\bigcup_{k=1}^\infty H_{n,k}
+\]
+For each fixed $n,k$, $H_{n,k}$ is countable as seen through identification with an $n$-tuple and so for a fixed $n$, $\bigcup_{k=1}^\infty H_{n,k}$ is a countable union of countable sets and therefore countable. Then we have that $H$ is a countable union of countable sets, and it too, is countable. \\
+\problempart{i} The set $I$ of two element subsets of $\Z_+$ is also countable. We can identify with each set $\{a,b\}$ with $a \leq b$ the 2-tuple $(a,b) \in T \subset \Z_+ \times \Z_+$ where $T = \{(x,y) \suchthat x < y\}$. To see that this map a bijection we note that the map is an injection because if $f(\{a,b\}) = f(\{c,d\}) = (x,y)$ then we must have that $\{a,b\} = \{c,d\}$. This is because if we order the sets in increasing order then $a = c = x$ and $b = d = y$, which means that the two sets must have been the same (up to a possible re-ordering of their elements). To see that it is surjective take any $2$-tuple $(x,y)$ and observe that the set $\{x,y\}$ maps onto it. So this map is a bijection onto $T \subset \Z_+ \times \Z_+$ and so $I$ is (equivalent to) a subset of a countable set and therefore countable. \\
+\problempart{j} The set $J$ of all finite subsets of all finite subsets of $\Z_+$ is also countable. By reasoning analogous to part {\bf I} we have that the set $J_n$ of all subsets of size $n$ is countable (this time we order the sets in increasing order and map to an $n$-tuple). Let $J_n$ be this set. Then we can write 
+\[
+J = \bigcup_{n=1}^\infty J_n
+\]
+This gives that $J$ is a countable union of countable sets and therefore countable. \\
+
+\problem{1.7.7} Let $F$ be the set of functions $f: \Z_+ \to \Z_+$ and $G$ be the set of functions $g: \Z_+ \to \{0,1\}$. We want to show that $|F| = |G|$. First note that there is a natural injection $p: G \into F$ where 
+\[
+(p\circ g)(x) = g(x) + 1
+\]
+then the image of each $g \in G$ is $p\circ g$ which maps into $\{1,2\} \subset \Z^+$. Now we will construct an injection in the reverse direction from $F \into G$. The first step is to represent for each $n$, the quantity $f(n)$ as a vector in $\Z_2^\omega$. To do this we note that each integer has a unique binary expansion
+\[
+f(n) = \sum_{k=1}^\infty \alpha_k2^{k-1}
+\]
+where $\alpha_k \in \{0,1\}$ for all $k$, and only finitely many $\alpha_k$ are non-zero. So we associate to each $f$ a matrix 
+\[
+\begin{array}{c|cccc}
+    & 1 & 2 & 3 & \cdots \\
+  \hline
+  f(1) & \alpha_{1,1} & \alpha_{1,2} & \alpha_{1,3} & \cdots \\
+  f(2) & \alpha_{2,1} & \alpha_{2,2} & \alpha_{2,3} & \cdots \\
+  f(3) & \alpha_{3,1} & \alpha_{3,2} & \alpha_{3,3} & \cdots \\
+  \vdots & \vdots & \vdots & \vdots & \ddots
+ \end{array}
+\]
+Where $\alpha_{n,k}$ is the $k^{th}$ digit in the binary expansion of $f(n)$. We then associate to $f$ the vector $\alpha = (\alpha_{1,1}, \alpha_{2,1}, \alpha_{1,2}, \ldots)$, which is obtained via the usual diagonal traversal, and define a new function $g: \Z \to \{0,1\}$ such that $g(n)$ is the $n^{th}$ component of  $\alpha$. I claim that the map $F: f \mapsto g$ is injective. Suppose it were not, then we would have two functions $f_1, f_2$ such that $F(f_1) = F(f_2) = g$. If we look at the definition of $g$ this means that if $f_1(n) = \sum_{k=1}^\infty \alpha_{n,k}2^{k-1}$ and $f_2(n) = \sum_{k=1}^\infty \beta_{n,k}2^{k-1}$ then $\alpha_{n,k} = \beta_{n,k}$ for every $n,k$. But the binary representation of a number is unique, and so $f_1(n) = f_2(n)$ for each $n$. This means that $f_1 = f_2$ and so the map $F$ is injective. \\
+\problem{1.9.2}
+\problempart{a} We appeal to the well ordering principle of $\Z_+$. To each element of $\mathcal{P}(\Z_+)$ we assign its minimal element, which exists because $\Z$ is well ordered.\\
+\problempart{b} Similarly to {\bf (a)} we define to each set in $\Z$ its minimal element, which exists and is well-defined because of well-ordering. \\
+\problempart{c} This one is slightly more complicated. The set $\Q$ is countable, and therefore we can give an enumeration of them $r_1, r_2, r_3, \ldots$. Then to each set of rationals $\{r_i, r_j, \ldots\}$ we let $m = \min\{i,j,\ldots\}$, which is unambiguous because the integers are well ordered. Then we define the choice function to be $c: \{r_i,r_j,\ldots\} \mapsto r_m$. \\
+\problempart{d} In this case it is not possible to define a choice function without the axiom of choice. To see this note that $X^\omega = \prod_{n \in Z_+} X$. This an infinite product of sets, and so any choice function would have to make countable infinite choices of elements in $X$. It is seen in the book that this is equivalent to the axiom of choice.
+
+\problem{1.9.3} Let $\{f_n\}_{n \in \Z_+}$ be a family of injective functions
+\[
+f_n: \{0,1,\ldots, n\} \lra A
+\]
+We will see that $A$ must be an infinite set. Suppose to the contrary that $A$ is finite. Then $|A| = N$ for some $N > 0$. But then for $f_m$, $m > N$ the pigeonhole principle says that there must be two elements in $\{0,1,\ldots, m\}$ that are mapped onto the same element of $A$. So $f_m$ cannot be injective. This contradiction shows that $A$ must be an infinite set. \\
+\indent To determine a choice function without the axiom of choice we appeal to the principle of recursive definition. We set 
+\[
+m = \min \{x \suchthat x \not\in \{f(1), f(2), \ldots, f(i-1)\}\}
+\]
+ and take $f(n) = f_n(m)$. this map is well-defined because the $f_n$ are injective by hypothesis. 
+
+\problem{1.9.6}
+\problempart{a} Suppose that $\mathcal{A}$ were a set that contained all other sets. Then we would have that $\mathcal{P}(\mathcal{A}) \in \mathcal{A}$ because $\mathcal{P}(\mathcal{A})$ is a set. Hence we can construct a surjection $S: \mathcal{A}\onto \mathcal{P}(\mathcal{A})$, but this implies that $|\mathcal{A}|\leq |\mathcal{P}(\mathcal{A})|$, which is impossible (proved in the book). \\
+\problempart{b} The point of the paradox is that there is no valid choice for where to include $\mathcal{B}$.  If $\mathcal{B} \in \mathcal{B}$, then $\mathcal{B}$ is not an element of itself, which is a contradiction. But if $\mathcal{B} \not\in \mathcal{B}$ then $\mathcal{B} \in \mathcal{B}$, which is also impossible.
+
+\problem{1.9.8} As before we will appeal to the uniqueness of binary expansions for real numbers. First we will construct a bijection from subsets of $Z_+$, i.e elements of $\mathcal{P}(\Z_+)$, to $X = \{0,1\}^\omega$. To each set $S \in \mathcal{P}(\Z_+)$ we associate the vector $x = (x_1,x_2,\ldots) \in X$ such that
+\[
+x_k = 
+\begin{cases}
+1 & k\in S \\
+0 & \text{otherwise}
+\end{cases}
+\]
+Call this function $g: S \mapsto x$. Recall (from previous problems) that this function is a bijection. Now we use the fact that each real number has a unique binary decimal representation that does note end in an infinite string of 1's. Let $f: \R \into X$ be the injection that sends each real number to its binary expansion.  Then using the fact that $f$ is injective and $g$ bijective (and hence injective as well) we have that $g^{-1} \circ f$ is an injection from $\R \into \mathcal{P}(\Z_+)$. Now we construct an injection $h: \mathcal{P}(\Z_+) \into \R$. Suppose that $S \in \mathcal{P}(\mathcal{Z_+})$, then $S$ must be countable. Let $s_1,s_2,\ldots$ be an enumeration of the elements of $S$. We then define $b: \mathcal{P}(\Z_+) \into X$ via $S \mapsto (0, s_1, 0, s_2, \ldots, 0, s_{n/2},\ldots)$. Then take $h = f \circ b$, which is an injection. We then apply the Schroeder-Bernstein Lemma to see that $|\mathcal{P}(\Z_+)| = |\R|$. 
+\end{document}
