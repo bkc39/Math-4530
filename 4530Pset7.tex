@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 6110 Problem Set 7}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\begin{document}
+\problem{3.28.2}
+We will modify the proof that the interval $(0,1)$ is not compact in the usual topology. Consider the set of points 
+\[
+A = \{1 - 1/n\}_{n=1}^\infty
+\]
+Then it is clear that $A \subset [0,1]$ because each point of $A$ is in $[0,1]$. We begin by arguing that if $A$ had a limit point, then this limit point would be $1$. Indeed, suppose that $\ell \in [0,1)$ is a limit point of $A$. We can find some interval 
+\[
+I_\ell = [1-1/k, 1-1/(k+1))
+\]
+That contains $\ell$. It is clear from the construction that $I_\ell \cap A = \{1-1/k\}$. This means that the interval $I'_\ell = [\ell, 1-1/(k+1))$ intersects $A$ in at most one point. We see that $I'_\ell \cap A = \ell$ when $\ell \in A$ and that $I'_\ell \cap A = \emptyset$ when $x\not\in A$. But $I'_\ell$ is open in the lower limit topology and so there is a neighborhood of $\ell$ that contains finitely many points of $A$, so $\ell$ is not a limit point of $A$. 
+
+Thus we consider the point 1. The set $[1,1) \subset [0,1]$ is open in the lower limit topology, and furthermore, it contains no points of $A$ because for all $n$ the point $1-1/n \not\in [1,1)$. So 1 cannot be a limit point of $A$ either. As a result we have that $A$ has no limit points in $[0,1]$ and is not limit point compact. 
+
+\problem{3.28.6}
+We are given a mapping $f: X \to X$ such that
+\[
+d(f(x), f(y)) = d(x,y)
+\]
+The first observation is that $f$ is continuous. We simply note that for any $\epsilon > 0$ if $d(x,y) < \delta$ with $\delta < \epsilon$ then we must have that
+\[
+d(f(x), f(y)) = d(x,y) = \delta < \epsilon
+\] 
+It is clear that $f$ must be injective because we have that if $f(x) = f(y)$ then 
+\[
+d(f(x), f(y)) = 0 = d(x,y)
+\]
+So $x = y$. 
+
+Now we need to show that $f$ is surjective. Following the hint, we proceed by contradiction. If $f$ were not surjective then there is some $y \not\in f(X)$. Moreover, we know that $f(X)$ is compact and closed because $X$ is compact and $f$ is continuous. As a result of this we can find an $\epsilon > 0$ such that 
+\[
+B_\epsilon(y) \cap f(X) = \emptyset
+\]
+Then we define the following sequence inductively: Let $x_1 = y$ and then let $x_{n+1} = f(x_n)$ for $n > 1$. Because $d(y, f(X)) > \epsilon$ we have that $d(x_i, x_j) > \epsilon$ for $i \neq j$ because $f$ is an isometry. But then no subsequence of $\{x_n\}$ can converge. Because $X$ is compact, it must also be sequentially compact, so this is a contradiction. 
+
+We then note that $f$ is a continuous bijection, and hence, a homeomorphism. 
+
+\problem{3.28.7}
+\problempart{a} Suppose that $f: X \to X$ is a contraction map from a compact space $X$ to itself. We will show that $f$ has a unique fixed point. We begin by showing that $f$ is necessarily continuous. Indeed, fix $\epsilon > 0$ and then observe that if we set $\delta = \epsilon/\alpha$ then we have that
+\[
+d(f(x), f(y)) < \alpha d(x,y) = \alpha \cdot \frac{\epsilon}{\alpha} = \epsilon
+\] 
+So $f$ is continuous. Then define recursively the sequence of functions $\{f_n\}_{n=1}^\infty$ by setting $f_1 = f$ and $f_{n+1} = f\circ f_n$. Then consider the sequence of images of these functions, the sets $A_n = f_n(X)$. We can see that each of the sets $A_n$ is compact. Indeed, $A_1 = f_1(X)$, and $f_1$ is a continuous image of a compact set, hence, compact. Proceeding by induction yields that if $f_n(X)$ is compact, then $f_{n+1} = f(f_n(X))$, is also a continuous image of a compact set, and therefore is compact. We now show that the set
+\[
+A = \bigcap_{n=1}^\infty A_n
+\]
+is non-empty. To do this, we observe that $A_n \subset A_{n+1}$ because $f$ is a contraction map. Then we have that $A \neq \emptyset$ because it is the intersection of a nested sequence of compact sets. We now see that $f(A) \subset A$. Suppose not, then there would be some $a \in A$ such that $f(a) \not\in A$, so that $a \in A_n - A_{n+1}$ for some $n$. But then $a \not\in A_{n+1}$, a contradiction. Now note that $\diam{X} = sup_{x,y \in X} d(x,y)$. As a result we can see that
+\[
+\diam{A_1} = \sup_{x,y \in A_1} d(x,y) = \sup_{u,v \in X} d(f(u), f(v)) = \alpha \sup_{u,v \in X} d(u,v) = \alpha\diam{X}
+\]  
+Continuing in this way we see that
+\[
+\diam{A_n} = \alpha^n\diam{X}
+\]
+As a result of this, $\diam{A_n} \to 0$ as $n \to \infty$ because $\alpha < 1$. So $A$ contains exactly one point, $x$, that satisfies $f(x) = x$ because we already showed that $f(A) \subset A$. 
+
+\problempart{b} We proceed in the same way as in the previous part. Define $f_n$ and $A_n$ in the same way, and let $A = \bigcap_{n} A_n$. We begin by showing that if $f$ has at most one fixed point. We argue again by contradiction. If there were two fixed point $u$ and $v$ then we would have that $f(u) = u$ and $f(v) = v$. So we compute
+\[
+d(u,v) = d(f(u), f(v)) < d(u,v)
+\]
+This is impossible, so $f$ has at most one fixed point. Now we need to figure out how to find. Also, we have $f(A) \subset A$ by the same reasoning as before. Now suppose that $a \in A$. Then for each $n$, $a \in A_n$, and as a result we can find a sequence of points $\{y_n\}_{n=1}^{\infty}$ such that $f(y_{n}) = a$. We also know that $X$ is compact, and as a result, it is sequentially compact. This means that the sequence $\{y_n\}$ has a convergent subsequence $\{y_{n_k}\}$. Suppose that $y_{n_k} \to y$ as $n_k \to \infty$. Then we have that $y$ is a limit point of each of the $A_n$ and because each $A_n$ is closed, $y \in A_n$ for all $a$. Then we know that $y \in A$. 
+
+Now if $A$ consists of only one point then we are done, and we have that $y$ is the fixed point of $f$. To see this, we note that $d: A \times A \to \R$ is a continuous function on a compact set, and therefore attains its maximum, say at $(u,v)$. Observe that $\diam{A} = \sup_{(u,v) \in A \times A} d(u,v)$. Therefore is we show that $d(u,v) = 0$, then $A$ contains only one point and we are done. Indeed, we have that $u = f(a)$ and $v = f(b)$ and that $(a,b) \in A$. But then
+\[
+d(a,b) = d(u,v) < d(a,b)
+\]
+A contradiction. So $A$ contains exactly one point, $y$, as determined above and $f(y) = y$. 
+
+\problempart{c} Take $X = [0,1]$ and let
+\[
+f(x) = x - \frac{x^2}{2}
+\]
+Furthermore, $f$ is strictly increasing on $[0,1]$ (its derivative is strictly positive) and attains its maximum at $x=1$ with $f(x) = 1/2$. Now observe that 
+\begin{align*}
+f(y) - f(x) &= (y - y^2/2) - (x - x^2/2) \\
+&= (y-x) - \frac{x^2 - y^2}{2} \\
+&= (y - x)(1 - \frac{(y+x)}{2}) 
+\end{align*}
+Taking the absolute value gives
+\[
+|f(x) - f(y)| = \left|(y - x)\left(1 - \frac{(y+x)}{2}\right) \right| \leq |x-y||1 - \frac{x+y}{2}| < |x- y|
+\]
+This shows that $f$ is a shrinking map (the fixed point is 0). To see that $f$ is not a contraction observe that if $x,y < 1-\alpha$ for any $\alpha \in [0,1]$ then we would have that
+\[
+|f(y) - f(x)| = \left|(y - x)\left(1 - \frac{(y+x)}{2}\right) \right| > |(y - x)| \left|\left(1 - \frac{2(1-\alpha)}{2}\right) \right| =|x-y|\alpha
+\]
+Which does not satisfy the definition of a contraction. 
+
+\problempart{d} We now consider the map $f: \R \to \R$ given by 
+\[
+f(x) = \frac{x + (x^2 + 1)^{1/2}}{2}
+\]
+We will show that $f$ is a shrinking map that is not a contraction. To see that $f$ is a shrinking map we observe that 
+\[
+f(y) - f(x) = \frac{1}{2}(y-x)\left(1 + \frac{(y+x)}{\sqrt{y^2 + 1} + \sqrt{x^2 + 1}}\right)
+\]
+Taking norms we get
+\[
+|f(y) - f(x)| = \left| \frac{1}{2}(y-x)\left(1 + \frac{(y+x)}{\sqrt{y^2 + 1} + \sqrt{x^2 + 1}}\right)\right| \leq |x-y|\left|\left(1 + \frac{(y+x)}{\sqrt{y^2 + 1} + \sqrt{x^2 + 1}}\right)\right|
+\]
+We then note that
+\[
+\left|\left(1 + \frac{(y+x)}{\sqrt{y^2 + 1} + \sqrt{x^2 + 1}}\right)\right| < 1
+\]
+to see that $f$ is shrinking map. to see that $f$ is not a contraction note that
+\[
+\left| \frac{f(x) - f(y)}{x - y}\right| = \frac{1}{2}\left|\left(1 + \frac{(y+x)}{\sqrt{y^2 + 1} + \sqrt{x^2 + 1}}\right)\right|
+\]
+So if we let $x,y \to \infty$ then $\left| \frac{f(x) - f(y)}{x - y}\right| \to 1$. As a result, $f$ cannot be a shrinking map because any $\alpha < 1$ with 
+\[
+|f(x) - f(y)| < \alpha|x-y|
+\]
+would imply 
+\[
+\left| \frac{f(x) - f(y)}{x - y}\right| < \alpha
+\]
+Which contradicts $\left| \frac{f(x) - f(y)}{x - y}\right| \to 1$. So $f$ is not a contraction.
+
+We can see that $f$ is strictly increasing by examining the derivative
+\[
+f'(x) = \frac{1}{2}\left(\frac{x}{\sqrt{x^2+1}} + 1\right)
+\]
+Which is always strictly positive. We then note the inequality
+\[
+x \leq \frac{x + |x|}{2} < f(x)
+\]
+As a result of this, there is can be no fixed point of $f$. 
+
+\problem{3.29.7} We will get the result by applying Theorem 3.29.1 to the spaces $S_\Omega$ and $\overline{S}_\Omega$ in the order topology. We need to check the following three conditions:
+\begin{enumerate}
+\item[(i)] $S_\Omega$ is a subspace of $\overline{S}_\Omega$.
+\item[(ii)] The set $\overline{S}_\Omega - S_\Omega$ consists of a single point.
+\item[(iii)] $\overline{S}_\Omega$ is a compact Hausdorff space.
+\end{enumerate}
+We know that $(i)$ is clear by the definition of closure (a set together with its limit points). Furthermore, $(ii)$ is clear because the only limit point of $S_\Omega$ which is not contained in $S_\Omega$ is $\Omega$ itself. To see this we appeal to the definition (c.f Munkres pg. 66) we have that $\overline{S}_\Omega = S_\Omega \cup \{\Omega\}$ so that $\overline{S}_\Omega - S_\Omega = \{\Omega\}$, a single point. So we only need to show that $\overline{S}_\Omega$. So we need only check compactness. Note that any open covering must contain an open interval containing $\Omega$. These intervals are of the form $(x, \infty)$, leaving the rest of the space $[x_0, x]$. But $[x_0, x]$ is compact in the order topology because the order topology has the least upper bound property. Hence, any open cover contains a finite subcover by appending the interval $(x, \infty)$ to the finite subcover of $[x_0,x]$. Consequently, $\overline{S}_\Omega$ is compact. We then apply the theorem to see that $S_\Omega \approx \overline{S}_\Omega$. 
+  
+\problem{4.30.1}
+\problempart{a} Let $X$ be a first-countable $T_1$ space. Then for every $x$ we can find a countable basis $B_1, B_2, \ldots$ at $x$. If we pick some $y \neq x$ then we know that there is some neighborhood of $x$, say $U$, such that $y \not\in U$. So this means that there is some $B_n$ such that $U \not\subset B_n$. This means that $\bigcap_n B_n = \{x\}$. As  a result, we have that $\{x\}$ is a $G_\delta$ set in $X$.  
+
+\problempart{b} The familiar space referred to is $\R^\omega$ in the box topology. The intuition leading to this is that if we consider the set $\R^\omega$ in the metric product topology, then we can use the previous part to get that each one point set is the intersection of balls of radius $1/n$ and so each singleton is a $G_\delta$. So if we take a finer topology we should retain this property, but perhaps lose the first countability. We then switch to the box topology on $\R^\omega$ and proceed via a diagonalization argument to see that there is no countable basis at a single point. Indeed, suppose that $B_1, B_2, \ldots$ was a countable basis at the point $x$. We then note that each of the sets $B_k$ is a product of intervals so
+\[
+B_k = \prod_{k=1}^{\infty} (a_{k_1}, b_{k_1})
+\]
+Then we can diagonalize these sets by noting that $(a_{k_k}/2, b_{k_k}/2) \not\subset (a_{k_k}, b_{k_k})$. So the neighborhood
+\[
+N = \prod_{k=1}^\infty (a_{k_k}/2, b_{k_k}/2)
+\]
+Does not contain any of the $B_k$ because it differs from each of them in the $k^{th}$ coordinate, a contradiction. Then $R^\omega$ cannot be first-countable in the box topology. 
+
+\problem{4.30.3} This is clear. We proceed by contradiction (as usual). Suppose that the number of limit points in $A$ were countable and let $L$ be the set of limit points of $A$. We look at the points in $A - L$, and observe that because $X$ has a countable basis we can find a basis neighborhood about each of these points, $a$, that is disjoint from $A - \{a\}$. Each of these neighborhoods is distinct by construction, and there can only be countably many of them because $X$ has a countable basis. But $A - L$ is uncountable because we assumed $L$ countable, this is a contradiction. Thus we must have uncountably many limit points of $A$. 
+
+\problem{4.30.5}
+\problempart{a} The intuition for this problem is straightforward. If $X$ has a countable dense subset $D$, then each point of $x$ is close to one of the points in $D$, so the union of a countable basis centered at each point of $D$ should suffice as a countable basis for $X$. To formalize this, we let $X$ be a metrizable space with countable dense subset $D$. To each $u \in D$ we assign the collection of open balls
+\[
+B_{u} = \{B_{1/n}(u) \suchthat n \in \N\}  
+\]
+Then we set 
+\[
+B = \bigcup_{u\in D}\bigcup_{n \in \N} B_{1/n}(u)
+\]
+and claim that $B$ is a countable basis for $X$. First note that $B$ is countable because it is the countable union of countably many sets. Now choose a point $x \in X$ and an open neighborhood $\mathcal{O}$ about $x$. Then we can find some $r > 0$ such that $B_r(x) \subset \mathcal{O}$. Observe that if we choose $2/r < n$ and find a point $y \in D \cap B_{1/n}(x)$, which is always possible because $D$ is dense, then we have
+\[
+x \in B_{1/n}(y) \subset B_{r}(x) \subset \mathcal{O}
+\]
+If we do this for each point $p \in \mathcal{O}$, we see that we can write $\mathcal{O}$ as a union of basis elements. So every open set can be written as a union of elements of $B$, and so $B$ is the desired countable basis for $X$.
+ 
+\problempart{b} We follow the same general strategy as the previous part. If $X$ is a metrizable Lindel\"{o}f space then we know that the covering of $X$ by $1/n$ balls forms a covering of $X$. Let 
+\[
+B_n = \{B_{1/n}(x) \suchthat x \in X\}
+\]
+Then $X \subset B_n$ for every $n$. Because $X$ is Lindel\"{o}f, we can extract a sequence of countable coverings $\{C_n\}$, where $C_n$ is the countable subcovering of $B_n$. We then propose 
+\[
+C = \bigcup_{n} C_n
+\]
+as a countable basis of $X$. $C$ is clearly countable because it is the countable union of countably many sets. Now take some open set $\mathcal{O} \subset X$ and let $x \in \mathcal{O}$. Then there is some $r > 0$ such that $B_r(x) \subset \mathcal{O}$. As a result of this we have that for $n > 1/r$, that $x \in B \in C_n$. So we conclude (as in the last part) that we can write $\mathcal{O}$ as a union of elements of $C$, and so $C$ is a countable basis for $X$.
+
+\problem{4.30.6} To see that $R_\ell$ is not metrizable observe that it is separable but not second-countable (c.f. Munkres pg 192), and as a result of this, not metrizable. The ordered square $I_o^2$ is compact but not separable. To see this, note that any countable dense subset of $I_o^2$ must contain all elements of the form $\{t\} \times (0,1)$, which are all open and disjoint. So there are at least as many of these sets as there are $t \in (0,1)$, but $(0,1)$ is uncountable, so there can be no countable basis for $I_o^2$. We appeal to the results of Exercise 4.30.5 (pg 193) to see that this is sufficient for a set to be non-metrizable. 
+
+\end{document}
