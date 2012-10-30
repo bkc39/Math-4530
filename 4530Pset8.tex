@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 6110 Problem Set 8}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+\DeclareMathOperator{\interior}{\text{int}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\begin{document}
+\problem{3.26.13} 
+\problempart{a} Suppose without loss of generality that $AB \neq G$, because otherwise $AB = G$ and is trivially closed. Otherwise, we can find some $x \in (G - AB)$. Therefore we have that $AB \cap \{x\} = 0$ which implies that $A \cap xB^{-1} = \emptyset$. Because $B$ is compact and multiplication and conversion are continuous we have that the set $xB^{-1}$ is compact. We then have the following
+\begin{lem}
+Let G be a topological group and $A,B \subset G$ be disjoint sets with $A$ closed and $B$ compact. Then there exists a neighborhood $\mathcal{C}$ of the identity, $e$, such that $A \cap \mathcal{C}B = \emptyset$ 
+\end{lem}
+\begin{proof}
+We begin with any $x \in B$, so that $x \in G - A$, an open set in $G$. Hence, we have that $e \in (G-A)x^{-1}$ and that $ (G-A)x^{-1}$ is open because inversion and multiplication are continuous. So we find a neighborhood $W_x$ of $x$ such that $W_xW_x \subset (G-A)x^{-1}$. To see this let $I = \interior (G-A)x^{-1}$ (the interior). Then $m^{-1}(I)$ ($m$ is multiplication) contains $(e,e)$ and is open. So we find $V_1, V_2$ such that $(e,e) \in V_1 \times V_2$ and $V_1 \times V_2 \subset  (G-A)x^{-1}$. Take $V_3 = V_1\cap V_2$ so that $V_3V_3 \subset  (G-A)x^{-1}$ and $e \in V_3$. Set $W_x = V_3 \cap V_3^{-1}$. Then $W_x$ is open and satisfies $W_xW_x \subset  (G-A)x^{-1}$. Now we observe that 
+\[
+B \subset \bigcup_x W_xx
+\]
+We can find a subcover $\bigcup_{i=1}^n W_{x_i}$. Then we take the set 
+\[
+\mathcal{C} = \bigcap_{i=1}^n W_{x_i}
+\]
+So for any $x \in B$ we have that $x\in W_{x_i}x_i$ for some $i$. So 
+\[
+\mathcal{C}x \subset Wx_ix \subset W_{x_i}W_{x_i}x_i \subset G-A
+\]
+So  we have that $A \cap \mathcal{C}x = \emptyset$. As a result we have that $A \cap \mathcal{C}B = \emptyset$ and we are done.
+\end{proof}
+We then apply the lemma to the sets $A$ and $xB^{-1}$ so that we find a neighborhood $U$ with $A \cap UxB^{-1} = \emptyset$. Consequently, we must have that $AB \cap Ux = \emptyset$. Furthermore, because $e \in U$ we have that $x \in Ux \subset (G - AB)$. So $G - AB$ must be open and so $AB$ must be closed. 
+ 
+\problempart{b} Let $A$ be a closed set in $G$. Then if $xH \not\in p(A)$ then $x$ cannot be in $AH$, which is closed by the previous part ($H$ is assumed compact). So we can find a neighborhood $N$ of $x$ such that $N \cap AH = \emptyset$. Then $p(N)$ is open because the quotient map is open. Moreover, it contains $xH$ and has $p(N) \cap p(A) = \emptyset$. Hence, $p(A)$ is closed. 
+
+\problempart{c} We know that $p: G \to G/H$ is continuous. By the previous part we deduce that it is also closed. Then we note that $p^{-1}(xH) = xH$ is compact because the group operation is a homeomorphism. Then we know that $p$ is a perfect map (c.f Munkres pg 172) and as a result the preimage $G$ of $G/H$ is compact. 
+ 
+\problem{4.30.13} This is clear. Let $\mathcal{C} = \{U_\alpha\}_{\alpha \in J}$ be a collection of disjoint subsets of $X$. $X$ has some countable dense subset $D$ and so $\{D \cap U_\alpha\}_{\alpha \in J}$ is also a disjoint collection of subsets of $X$. We then choose $d_\alpha$ to be an element of $D \cap U_\alpha$. Clearly, $\alpha \neq \beta$ implies that $d_\alpha \neq d_\beta$ because otherwise $d_\beta \in D\cap U_\alpha \subset U_\alpha$, a contradiction. But then we have a bijective correspondence $d_\alpha \bijection U_\alpha$ and the $d_\alpha$ are countable so the $U_\alpha$ must also be countable. 
+
+\problem{4.31.5} We want to impose the condition that $f(x) = g(x)$ after we apply the map to $X$. Let 
+\[
+P = \{x \suchthat f(x) = g(x)\}
+\]
+Consider the map 
+\begin{align*}
+h: X &\to Y \times Y \\
+x &\mapsto (f(x), g(x))
+\end{align*}
+Then points of the form $(y,y) \in Y\times Y$ have preimage $h^{-1}(\{ (y,y) \suchthat y \in Y\}) = P$, because we have that $y = f(x) = g(x)$. Furthermore, we have that the set of points $\{(y,y) \suchthat y \in Y\}$ is closed in $Y$ because $Y$ is Hausdorff. Because each of the maps $f$ and $g$ are continuous we have that $h$ is continuous and so the preimage of $\{ (y,y) \suchthat y \in Y\}$ is closed. This gives precisely that $P$ is closed and we are done. 
+
+\problem{4.31.6} Let $\mathcal{C} \subset Y$ be closed and suppose that $V$ is open and $\mathcal{C} \subset V$. We define $A= p^{-1}(\mathcal{C})$ and $U = p^{-1}(V)$, and note that $A \subset U$ because $p$ is continuous and $\mathcal{C} \subset V$. Find some open set $W \supset A$ such that $\overline{W} \subset U$. Then we see that $p(X-W)$ is closed and 
+\[
+\mathcal{C}\subset  Y - p(X-W) \subset p(W) \subset V
+\]
+Because $p$ is surjective we see that $y \in \mathcal{C}$ implies the existence of an $a \in A$ such that $y = p(a)$. However, for no $b \in X - A$ do we have $y \not\in p(X - A) \supset p(X-W)$. Furthermore, $y\not\in p(X - W)$ implies that $y \in p(W)$ by surjectivity. So set $W' = Y - p(X-W)$ and observe that $\mathcal{C} \subset W' \subset V$ is open. So we have that $p(W) \subset V$ is closed and contains $W'$ giving that $\overline{W}' \subset V$. Then for any two $A,B \subset Y$ closed and disjoint use the sets $W_A'$ and $W_B'$ to give a separation into disjoint open sets. 
+  
+\problem{4.32.6}In the forward direction we suppose that $A$ and $B$ are separated in $X$. Following the hint, we consider the space $Y = X - (\overline{A} \cap \overline{B})$. Clearly, $Y$ is open because it is the complement of a closed set. Moreover, we have that $A,B \subset Y$. So we have that
+\[
+\overline{A}_Y \cap \overline{B}_Y = Y \cap \overline{A} \cap \overline{B} = \emptyset
+\] 
+We then apply the normality property to get that $\overline{A}$ and $\overline{B}$ can be separated by disjoint open neighborhoods in $X$, say $U$ and $V$, respectively. Then we have that $Y \cap U$ and $Y\cap V$ give a separation in $Y$ and we are done. 
+
+Conversely, take $Y \subset X$ and $A,B \subset Y$ to be disjoint closed sets in $Y$. We see that 
+\[
+\overline{A}_X \cap B = \overline{A}_X \cap Y \cap B \subset \overline{A}_Y \cap B = \emptyset
+\]
+Analogously, we have that $\overline{B} \cap A = \emptyset$. Thus, $A$ and $B$ can be separated by neighborhoods in $X$, $U$ and $V$, respectively, such that $Y \cap U$ and $Y \cap V$. This completes the proof of the claim. 
+
+\problem{4.33.5} Most of the work for this theorem actually gets done in the preceding problem, which we will do for the sake of completeness. We first establish the following
+\begin{thm}
+Let $X$ be normal. There exists a continuous function $f: X \to [0,1]$ defined by
+\begin{align*}
+f(x) = \begin{cases}
+0 & x \in A \\
+y > 0 & \text{ otherwise}
+\end{cases}
+\end{align*}
+if and only if $A$ is a closed $G_\delta$ set in $X$. 
+\end{thm}
+\begin{proof}
+In the forward direction we are given $f$. We simply note that we can write the set $\{0\}$ as the intersection
+\[
+\{0\} = \bigcap_n [0,1/n)
+\]
+Because $f$ is continuous so that we can write 
+\[
+f^{-1}(\bigcap_n [0,1/n) = \bigcap f^{-1}([0,1/n)
+\]
+Which is a $G_\delta$ set in $X$. 
+
+In the reverse direction we have that if $A$ is $G_\delta$ then the set $\cap_nV_n = A$. Consider the sets $X - V_n$ for each $n$. We apply the Urysohn lemma to each of these sets because $A \cap V_n^c = \emptyset$ by construction and both are closed. As a result of this fact, we get a family of functions  $f_n$ such that $f_n(A) = \{0\}$ and $f_n(V_n) = 1$. Then we define 
+\[
+f(x) = \sum_{n=1}^\infty 2^{-n}f_n(x)
+\]
+Then we have that $f(A) = \{0\}$ because each of the $f_n$ is 0 on $A$. Furthermore, it is strictly greater than $0$ on $A^c$ because $f_n(V_n^c) = 1$ for some $n$ so at least one term in the sum is greater than 0. Finally it is clear that $f$ is continuous because the sum converges absolutely (monotone increasing and bounded by geometric series). Therefore it converges uniformly, and the uniform limit of continuous functions is continuous. 
+\end{proof} 
+
+With this result in hand, the following is more straightforward. 
+\begin{thm}
+Let $X$ be a normal space. there is a continuous function $f: X \to [0,1]$ such that 
+\[
+f(x) = \begin{cases}
+0 & x \in A \\
+1 & x \in B  \\
+0 < y < 1 & \text{ otherwise}
+\end{cases}
+\]
+if and only if $A$ and $B$ are disjoint closed $G_\delta$ sets in $X$. 
+\end{thm}
+\begin{proof}
+In the forward direction, suppose that we are given our function $f$. Then we apply the previous theorem twice on $f, A$ and $(1-f), B$. As a result this gives that both $A$ and $B$ are $G_\delta$. 
+
+For the reverse we apply the proceeding theorem to get the existence of $g$ and $h$ such that $g^{-1}(\{0\}) = A$ and $h^{-1}(\{0\}) = B$. Then we simply define 
+\[
+f(x) = \frac{g(x)}{g(x) + h(x)}
+\]
+The claim is that $f$ is the desired function. Clearly, if $x \in A$ then $g(x) = 0$ and so $f(x) = 0$. Next we check the case that $x \in B$, in which case $h(x) = 0$ and we are left with $f(x) = g(x)/g(x) = 1$, as desired. Lastly, we see that otherwise we have a positive real bounded above by 1 and below by 0 as the value of $f(x)$. It is clear that the function is continuous because it is a non-vanishing quotient of continuous functions. This completes the proof. 
+\end{proof}
+\end{document}
