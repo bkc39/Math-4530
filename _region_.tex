@@ -1,0 +1,85 @@
+\message{ !name(4530final.tex)}\documentclass{article}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.5in,rmargin=1.5in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{relsize,fancyhdr,parskip}
+\usepackage{graphicx}
+\usepackage[all,knot]{xy}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Final Exam}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+\newcommand{\exercise}[1]{\noindent{\textbf{Exercise #1:}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+\newcommand{\seq}[2]{\{#1_{#2}\}_{#2 = 1}^\infty}
+
+\DeclareMathOperator{\im}{\text{im}}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\xyoption{arc}
+
+\begin{document}
+
+\message{ !name(4530final.tex) !offset(520) }
+$\{f_n(x_k) \suchthat n \in C_{k-1}\}$. As before, this is
+    a bounded sequence in $\R^k$ and has a convergent subsequence and
+    we set $C_k$ to be the set of indicees of that convergent
+    subsequence. So we have that we have that $f_n(x_k)$ exists as
+    $n\to\infty$ within $C_k$. This completes the construction.
+  \end{proof}
+  Let $i_k$ be the $k^{\text{th}}$ term of $C_k$ in the preceeding
+  lemma and set
+  \[
+  C = \{i_1, i_2, \ldots\}
+  \]
+  By construction, there are at most $k-1$ terms of $C$ that are not
+  in $C_k$ and so $\lim_{n\to\infty} f_n(x)$ exists for every $x\in E$
+  as $n\to\infty$ within $C$.
+
+  Now choose an $\epsilon > 0$ and apply the equicontinuity of the
+  $f_n$ to find a $\delta > 0$ such that $d(p,q) < \delta$ implies
+  that $|f_n(p) - f_n(q)| < \epsilon$ for all $n$. Cover $X$ with a
+  set of balls of radius $\delta/2$ centered at each point. Because
+  $X$ is compact we can find a finite subcover $B_1, B_2,\ldots, B_M$
+  of open balls. Because $E$ is dense in $X$ there are points $p_i \in
+  B_i \cap E$ for $i \leq M$. Moreover, we see that $p_i \in E$ imples
+  that $\lim_{n\to\infty} f_n(p_i)$ exists within $C$. Hence, we can
+  find an integer $N$ large enough that $|f_m(p_i) - f_n(p_i)| <
+  \epsilon$ for $i \leq M$ and $n,m > N$ and $n,m \in C$.
+
+  Now we just use the triangle equality to get the uniform
+  convergence. Pick an $x\in X$. then $x \in B_i$ for some $i$ and
+  $d(x,p_i) < \delta$. If we choose $\delta$ and $N$ as above we have that
+  
+\message{ !name(4530final.tex) !offset(564) }
+
+\end{document}

@@ -1,0 +1,928 @@
+\documentclass{article}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.5in,rmargin=1.5in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{relsize,fancyhdr,parskip}
+\usepackage{graphicx}
+\usepackage[all,knot]{xy}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Final Exam}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{:}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+\newcommand{\exercise}[1]{\noindent{\textbf{Exercise #1:}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+\newcommand{\seq}[2]{\{#1_{#2}\}_{#2 = 1}^\infty}
+
+\DeclareMathOperator{\im}{\text{im}}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\xyoption{arc}
+
+\begin{document}
+\section{Section 38: The Stone-\u{C}ech Compactification}
+
+\exercise{38.4}
+
+We are given a compactification $Y$ of the completely
+regular space $X$. Let $c: X \to Y$ be the imbedding of $X$ into $Y$ and
+let $\beta: X \to \beta(X)$ be the imbedding from $X$ into its Stone-\u{C}ech
+Compactification. By the definition we have that $c$ extends uniquely
+to a continuous map $g: \beta(X) \to Y$ as seen below
+\[
+\begin{xy}
+(0,0)*+{\beta(X)}="BETAX"; (15,15)*+{Y}="Y"; (0,15)*+{X}="X";
+{\ar_{\mathlarger{\beta}} "X";"BETAX"};
+{\ar^{\mathlarger{c}} "X";"Y"};
+{\ar_{\mathlarger{g}} "BETAX";"Y"};
+\end{xy}
+\]
+It is clear that $g$ is the identity on $X$ because $c$ is the
+identity on $X$ and $g$ extends $c$. To get that $g$ is a closed map
+we need the following
+
+\begin{lem}[Exercise 26.4]
+  A continuous map $f: X \to Y$ from the compact space $X$ to the
+  Hausdorff space $Y$ is closed.
+\end{lem}
+\begin{proof}
+  Let $A$ be a closed subset of $X$. Then by Theorem 26.2 (Munkres
+  pg. 165), $A$ is compact. We then apply Theorem 26.5 (Munkres
+  pg. 166) to get that $f(A)$ is compact as well. Then because $Y$ is
+  Hausdorff we can apply Theorem 26.3 (Munkres pg. 165) to get that
+  $A$ is closed as well. Hence, $f$ is a closed map.
+\end{proof}
+
+We simply apply the above lemma to $g$ using the fact that $X$ is
+compact and $Y$ is Hausdorff by construction. Finally, to get
+surjectivity we note that the image of $g$ is dense in $Y$ because $g$
+extends $c$ and we know that $\overline{c(X)} = \overline{X} = Y$ by
+definition. Because $\overline{c(X)} \subset \beta(X)$ by
+construction, and $g$ is a closed map that extends $c$, we see that
+$g(\overline{X})$ is a closed set containing $X$ and therefore must
+contain $\overline{X} = Y$. Hence, it contains all of $Y$ and we are
+done.
+
+\exercise{38.5}
+\begin{enumerate}
+\item [\textbf{(a)}] Let $f: S_\Omega \to \R$ be continuous. Following
+  the hint, we fix an $\epsilon > 0$. We need to show that there is
+  some $\alpha \in S_\Omega$ such that $|f(\beta) - f(\alpha)| <
+  \epsilon$ for all $\beta > \alpha$. Suppose not, then we can find an
+  increasing sequence $\{s_n\}_{n=1}^\infty$ in $S_\Omega$ such that
+  $|f(s_n) - f(s_{n-1})| \geq \epsilon$. We then note that the
+  sequence $\{s_n\}_{n=1}^\infty$ must converge to its least upper
+  bound in $S_\Omega$, but the sequence $\{f(s_n)\}_{n=1}^\infty$ in
+  $\R$ does not converge by construction. This contradicts the
+  continuity of $f$ and so we must be able to find such an $\alpha$.
+
+  Now we use the preceding to find that $f$ must be constant. Indeed,
+  for each integer $n$ we know there is some element $\alpha_n$ such
+  that $|f(\beta) - f(\alpha_n)| < 1/n$ by the above argument. This
+  forms a sequnce $\{\alpha_n\}_{n=1}^\infty$ in $S_\Omega$ and let
+  $\alpha$ be an upper bound. Then we have that $|f(\beta) -
+  f(\alpha)| < 1/n$ for all $\beta > \alpha$ and every $n$. Hence,
+  $|f(\beta) - f(\alpha)| = 0$ and so $f$ is constant on $(\alpha,
+  \Omega)$ as desired.
+\item [\textbf{(b)}] By the preceeding part, we know that any
+  continuous function $S_\Omega \to \R$ is eventually constant and
+  hence, is bounded. We then have the following
+  \begin{claim}
+    Any continuous, bounded function $f: S_\Omega \to \R$ extends uniquely to
+    the one-point compactification $\overline{S_\Omega}$.
+  \end{claim}
+  \begin{proof}
+    It is clear that boundedness is necessary because the extension of
+    $f$ will send $S_\Omega$ into $\R$ and will therefore be
+    bounded. Let $\bar{f}$ be the extension of $f$ to $S_\Omega$. The
+    condition that $\bar{f}$ must satisfy is that for any sequence
+    $\{s_n\}_{n=1}^\infty$ such that $s_n \to s$
+    \[
+    \lim_{n\to\infty} \bar{f}(s_n) = \bar{f}(s)
+    \]
+    This is clear when $s \in S_\Omega$ because $f$ is continuous on
+    $S_\Omega$. If $s_n \to \overline{\Omega}$ then we note that $\R$
+    has the least upper bound property and define
+    $\bar{f}(\overline{\Omega}) = \sup f(s_n)$. This mapping is
+    well-defined because $f$ is continuous and so if $\seq{t}{n}$ was
+    another sequence converging to $\overline{\Omega}$ then $|f(s_n) -
+    f(t_n)| < \epsilon$ for any $\epsilon > 0$ and $n > N$ for a
+    sufficiently large $N$. This shows that $\bar{f}$ is well-defined
+    and moreover, unique.
+  \end{proof}
+  Because every continuous function on $S_\Omega$ extends to the one
+  point compactification we can apply Theorem 38.5 to the one-point
+  compactification and $\beta(S_\Omega)$ to get that the two
+  compactifications are equivalent.
+\item [\textbf{(c)}] To see that any other compactification $Y$ of
+  $S_\Omega$ is equivalent to $\overline{S_\Omega}$ we appeal to the
+  previous exercise and note that $Y$ must be a quotient of
+  $\beta(S_\Omega)$, and hence for each $f$ from $S_\Omega$ to $\R$
+  let the extension $\bar{f}_{Y}$ be the restriction of $\bar{f}$ to
+  $Y$. Then $\bar{f}_Y$ is uniquely determined and continuous because
+  it is the composition of continuous functions. We then apply Theorem
+  38.5 again to see that $Y$ is equivalent to
+  $\overline{S_\Omega}$. Hence, any two compactifications of
+  $S_\Omega$ are equivalent.
+\end{enumerate}
+
+\exercise{38.7}
+\begin{enumerate}
+\item [\textbf{(a)}] Consider the function $f: X \to \{0,1\}$ given by
+  \[
+  f(x) =
+  \begin{cases}
+    0 & x \in A \\
+    1 & x \in X - A
+  \end{cases}
+  \]
+  This function is continuous when $X$ has the discrete topology. As
+  such, it has an extension $\bar{f}: \beta(X) \to \{0,1\}$ that is
+  also continuous. Suppose that $\overline{A} \cap \overline{X-A} \neq
+  \emptyset$, where closures are taken in $\beta(X)$. Then we would
+  have some point $y$ which belongs to both. Then any neighborhood $V$
+  of $y$ intersects both $A$ and $X-A$. This would mean that if
+  $\bar{f}$ must be the constant function because otherwise there
+  would be a discontinuity at $y$. But this is impossible because
+  $\bar{f}$ extends $f$ and maps $A$ and $X-A$ to different
+  values. Hence, $\overline{A}$ and $\overline{X-A}$ are disjoint.
+\item [\textbf{(b)}] The first thing to notice is the following
+  \begin{lem}
+    Let $A$ and $X$ be as in the preceding part. Then $\overline{A}$
+    is both open and closed in $\beta(X)$.
+  \end{lem}
+  \begin{proof}
+    We note that the conlusion of the previous problem is the same as
+    saying that $\overline{X-A} \subset \beta(X) - \overline{A}$. We
+    then have the chain of inclusions
+    \begin{align*}
+      \beta(X) - \overline{A} &= \overline{X} - \overline{A} \\
+      &\subseteq \overline{X-A} \\
+      &\subseteq \beta(X) - \overline{A}
+    \end{align*}
+    So we must have that $\beta(X) - \overline{A} = \overline{X-A}$
+    and thus $\overline{A}$ is open as well as closed.
+  \end{proof}
+  The plan is to use this fact to show that $\overline{U}$ is open (it
+  is clearly closed). Indeed, we verify the following
+  \begin{claim}
+    If $U \in \beta(X)$ is open then $\overline{U\cap X} = \overline{U}$.
+  \end{claim}
+  \begin{proof}
+    One inclusion is obvious, namely $U \cap X \subset U$ implies that
+    $\overline{U \cap X} \subset \overline{U}$. For the reverse
+    inclusion let $u$ be point of $\overline{U}$ and let $V$ be a
+    neighborhood of $u$. Then we see that $V \cap U \neq \emptyset$
+    because $u \in \overline{U}$. Consequently,
+    \[
+    (V \cap U) \cap X = V \cap (U\cap X) \neq \emptyset
+    \]
+    because $X$ is dense. So $x \in \overline{U\cap X}$, which gives
+    the reverse inclusion so we are done.
+  \end{proof}
+  With the clain in hand we apply the lemma to the set $U\cap X$ to
+  get that $\overline{U\cap X} = \overline{U}$ is both open and
+  closed.
+\item [\textbf{(c)}] Let $T$ be a subset of $\beta{X}$ containing at
+  least two points $x$ and $y$. We need to show that $T$ is not
+  connected. If we pick any open $U \subset \beta(X)$ such that $x \in
+  U$ and $y \not\in U$, and such a choice is possible because
+  $\beta(x)$ is Hausdorff, then we have that
+  \[
+  T = (T \cap \overline{U})\cup (T - \overline{U})
+  \]
+  is a separation of $T$. Thus, we have that the connected components
+  of $\beta{X}$ are singletons, because they are both open and
+  connected and any set larger than a singleton is not
+  connected. Thus, $\beta(X)$ is totally disconnected.
+\end{enumerate}
+
+\exercise{38.9}
+\begin{enumerate}
+\item [\textbf{(a)}] We will suppose to the contrary and pursue a
+  contradiction. The only natural thing to do is to find an
+  ``inclusion-map'' test like we did in the previous exercise, and use
+  the lift of that map to find a contradiction. So we need to find
+  suitable sets $A,B$ such that
+  \[
+  \xymatrix{
+    p_1 & \bullet & p_2
+    \bullet & p_0 & \bullet
+    p_3 & \bullet & p_4
+  }
+  \]
+  $\bar{f}^{-1}(0)$ and $\bar{f}^{-1}(1)$ are disjoint, but map to the
+  same value under $f$, and then we will have our contradiction.
+
+  Indeed, suppose that $\seq{x}{n}$ is a sequence in $X$ that
+  converges to $x \in \beta(X) - X$. We need to construct disjoint
+  sets such that $x_n \to x$ in both $A$ and $B$. One way to do this
+  is to remove the duplicates from $x_n$. We create the new sequence
+  $x'_n$ from $x_n$ inductively by setting $x'_1 = x_1$ and $x_n =
+  \inf_m \{x_m \mathrel{|} x_m \neq x'_k, k < n\}$. It is easy to see
+  that $x'_n \to x$ because any neighborhood of $x$ contains all but
+  finitely many of the $x_n$, and let $x_N$ be the highest index not
+  contained in that neighborhood. Then we have that for sufficiently
+  large $M$, $x'_m = x_n$ with $m > M, n > N$ by construction. So
+  $x'_n \to x$ as well.
+
+  By construction, we have that the sets $A = \{x'_1, x'_3, x'_5,
+  \ldots\}$ and $B = \{x'_2, x'_4, x'_6,\ldots\}$ are disjoint, and
+  have limit point $x$. We then verify the following
+  \begin{claim}
+    We have $\overline{A} = A \cup \{x\}$ and $\overline{B} = B \cup
+    \{x\}$, where the closures are taken in $\beta(X)$.
+  \end{claim}
+  \begin{proof}
+    We have already shown that $x$ is a limit point of $A$ and hence,
+    $x \in \overline{A}$. Since $A \subset A \cup \{x\} \subseteq
+    \overline{A}$ and $\overline{A}$ is the smallest closed set
+    containing $A$ it will suffice to show that $A \cup \{x\}$ is
+    closed.
+
+    Consider $C = \beta(X) - (A \cup \{x\})$. If we choose any point
+    $y \in C$ then $y$ is not a limit of the sequence
+    $\{x_{2n+1}\}_{n=1}^\infty$ by construction. Because $y$ is not a limit of
+    the sequence we an find a neighborhood $V$ of $y$ that contains
+    only finitely many of the $x_{2n+1}$. Because $y$ is not in $A$ we
+    can remove these finitley many points from $V$ to get a new
+    neighborhood $V'$ such that $V' \cap (A \cup \{x\}) =
+    \emptyset$. Hence, $V'$ is wholly contained in $C$ and so $C$ is
+    open and as a result $A \cup \{x\}$ is closed.
+
+    The proof for $B \cup \{x\}$ is analogous.
+  \end{proof}
+  This shows the first property that we wanted of $A$ and $B$, namely
+  that $\overline{A}\cap\overline{B} \neq \emptyset$ while $A\cap B =
+  \emptyset$.
+
+  Now we make the observation that $A$ and $B$ are both closed in $X$
+  because we have that
+  \[
+  \overline{A} = X \cap \overline{A} = X \cap (A \cup \{x\}) = A
+  \]
+  and similarly for $B$. Then we can apply the Urysohn lemma,
+  recalling that $X$ is normal and $A,B$ are disjoint closed subsets
+  of $X$. Hence, $A$ and $B$ can be separated by a continuous function
+  $f: X \to [0,1]$. We then lift $f$ to a function $\bar{f}: \beta(X)
+  \to [0,1]$ that agrees with $f$ on $X$. We then note that $A \subset
+  f^{-1}(0)$ and $B \subset f^{-1}(1)$ by construction so that
+  $\overline{A} \subset \bar{f}^{-1}(0)$ and $\overline{1} \subset
+  \bar{f}^{-1}(1)$. So $\overline{A}$ and $\overline{B}$ are disjoint.
+
+  This gives a contradiction in that $\overline{A} \cap \overline{B}$
+  is both empty and non-empty and so no point of $\beta(X) - X$ can be
+  a limit of a sequence of points in $X$.
+\item [\textbf{(b)}] Suppose that $X$ is completely regular and
+  noncompact. Then $X$ must be properly contained in $\beta(X)$
+  because $\beta(X)$ is compact and $X$ is not. Because $X$ is
+  completely regular we can apply the previous part of this exercise
+  to see that no point in $\beta(X) - X$ is a limit of a sequence in
+  $X$. However, because one-point sets are closed in $X$ there is a
+  function that separates every point of $\beta(X) - X$ and $X$. If we
+  extend such a function to $\beta(X)$ we see that $\beta(X)$ does
+  not satisfy Theorem 21.3 (Munkres pg. 130), and is therefore not
+  metrizable.
+\end{enumerate}
+
+\exercise{38.10}
+\begin{enumerate}
+\item[\textbf{(i)}] Let $1_X$ be the identity map of $X$. Then if we
+  consider the canonical imbedding of $X$ into $\beta(X)$, which is
+  equal to $1_X$ on $X$, we can lift this function to a unique continuous
+  function $\bar{f}: \beta(X) \to \beta(X)$ that is the identity on
+  $X$. Because $X$ is dense in $\beta(X)$ and $\beta(X)$ is compact
+  and Hausdorff we have that $\bar{f}$ determined by its values on $X$
+  and therefore must be the identity on all of $\beta(X)$.
+\item[\textbf{(ii)}] This is a repeated application of the universal
+  property of $\beta(X)$. The situation is most readily understood
+  with a diagram
+  \[
+  \begin{xy}
+    (0,0)*+{\beta(Y)}="BETAY"; (0,15)*+{Y}="Y";
+    (-15,0)*+{\beta(X)}="BETAX"; (-15,15)*+{X}="X";
+    (15,15)*+{Z}="Z";
+    {\ar "X";"BETAX"};
+    {\ar "Y";"BETAY"};
+    {\ar^{\mathlarger{f}} "X";"Y"};
+    {\ar^{\mathlarger{g}} "Y";"Z"};
+    {\ar_{\mathlarger{\bar{f}}} "BETAX";"Y"};
+    {\ar_{\mathlarger{\bar{g}}} "BETAY";"Z"};
+    {\ar "BETAX";"BETAY"};
+  \end{xy}
+  \]
+  We simply apply the lifting twice. We first are given a function $f:
+  X \to Y$, which can be uniquely extended to the function $\bar{f}:
+  \beta(X) \to Y$ and so $g \circ \bar{f}$ is an extension of $g\circ
+  f$ from $\beta(X) \to Z$. However, $g$ can be lifted to a map
+  $\bar{g}: \beta(Y) \to Z$ and so $g\circ \bar{f}$ extends to the map
+  $\bar{g} \circ \bar{f}$ and so because all extensions are unique we have
+  \[
+  \beta(g \circ f) = \beta(g) \circ \beta(f)
+  \]
+  In other words, the diagram above commutes.
+\end{enumerate}
+
+\section{Section 43: Complete Metric Spaces}
+\noindent{\textbf{Exercise 43.5} (Banach Contraction Principle)\textbf{:}}
+
+Consider any point $x_0 \in X$. From $x_0$ we construct the sequence
+$x_0, f(x_0), f(f(x_0)), f^3(x_0),\ldots$, call it $\seq{x}{n}$. We
+first show that this sequence converges to some $x \in X$, which we
+hope will be our fixed point. Let $D = d(x_0, x_1)$, so because $f$ is
+a contraction $d(x_2,x_1) \leq \alpha D$ and in general we can estimate
+\begin{align*}
+  d(x_n,x_m) &\leq \sum_{k=n}^m d(x_k, d_{k+1}) \\
+  &= \sum_{k=1}^m d(x_k, d_{k+1}) - \sum_{k=1}^n d(x_k, d_{k+1}) \\
+  &= \frac{D}{1-\alpha} (\alpha^{n+1} - \alpha^{m+1}) \\
+  &\leq \alpha^{n+1}\frac{D}{1-\alpha}
+\end{align*}
+This quantity goes to $0$ as $n$ gets large because $\alpha <
+1$. Consequently, we have that for sufficiently large $n,m$ that
+$d(x_n, x_m) < \epsilon$ for any $\epsilon > 0$ and so $\seq{x}{n}$ is
+a Cauchy sequence. Because $X$ is a complete metric space, we have
+that $\seq{x}{n}$ converges in $X$, say to $x$.
+
+We will now show that $x$ is the desired fixed point. Note that
+\[
+\lim_{n\to\infty} d(f(x_n),x_n) = \lim_{n\to\infty} \alpha^n D = 0
+\]
+However, because $d$ is continuous on $X$ that we can exchange the
+limiting operation (twice) and get that $d(f(x),x) = 0$ so $x = f(x)$
+and $x$ is the desired fixed point.
+
+For uniqueness, we suppose that there were another point $y$ such that
+$f(y) = y$. If $y\neq x$ then we have that $d(x,y) > 0$ and so we
+apply $f$ to get that
+\[
+d(f(x), f(y)) \leq \alpha d(x,y) < d(x,y)
+\]
+But then either $f(x) \neq x$ or $f(y) \neq y$ which is a
+contradiction. So $x$ must be the unique fixed point.
+\hfill\qedsymbol
+
+\exercise{43.9}
+\begin{enumerate}
+\item [\textbf{(a)}] To see that $\sim$ is an equivalence relation we
+  need to verify that it is reflexive, symmetric and
+  transitive. Reflexivity is clear because $d(x_n,x_n) = 0$ for all
+  $n$ and so it clearly converges to 0. Symmetry is also evident from
+  the symmetry of the metric. If we have that $\textbf{x} \sim
+  \textbf{y}$ then we have that
+  \[
+  d(x_n,y_n) = d(y_n,x_n) = 0
+  \]
+  Which gives that $\textbf{y} \sim \textbf{x}$. Transitivity follows
+  from the triangle inequality. Fix an $\epsilon > 0$ and suppose that
+  $\textbf{x} \sim \textbf{y}$ and $\textbf{y} \sim \textbf{z}$. Then
+  we see that
+  \[
+    d(x_n,z_n) \leq d(x_n,y_n) + d(y_n,z_n) \\
+  \]
+  So that when we let $n \to \infty$ we get that $d(x_n,z_n) \to
+  0$. So $\sim$ is an equivalence relation.
+\item [\textbf{(b)}] Let $x,y$ be two elements of $X$. We need to show
+  that the map $h$ is injective, continuous and preserves the
+  metric. Indeed, we see that $h$ is injective because if $h(x) =
+  h(y)$ then $[(x,x,\ldots)] = [(y,y,\ldots)]$ which clearly implies
+  that $x = y$ because otherwise the two sequences would differ in
+  every term.
+
+  To see that $f$ is continuous we fix an $\epsilon > 0$ and note that
+  if we set $\delta = \epsilon$ then $d(h(x),h(y)) < \epsilon$
+  whenever $d(x,y) < \delta$ and so $f$ is continuous.
+
+  To see that $h$ preserves the metric observe that
+  \[
+  d(x,y) = \lim_{n\to\infty} d(x,y) = D([(x,x,\ldots)], [(y,y,\ldots)])
+  \]
+  Because the limit of a constant sequence is just that constant.
+\item [\textbf{(c)}] Now suppose that we are given an $\textbf{x} =
+  (x_1,x_2\ldots) \in Y$. We need to show that there is a sequence of
+  points in $Y$ converging to $\textbf{x}$. Indeed, let $\epsilon > 0$
+  be given and recall that $x_1,x_2\ldots$ is a Cauchy sequence in $Y$
+  because it is in the image of $X$, which is defined as a set of
+  Cauchy sequences. We then know that there is some $N$ such that $m,n
+  > N$ implies that $d(x_mx_n) < \epsilon/2$. Set $\textbf{y} =
+  h(x_N)$ then we note that
+  \[
+  D(\textbf{x},\textbf{y}) = \lim_{n\to\infty} d(x_n, x_N) \leq \epsilon/2
+  \]
+  So that $D(\textbf{x}, h(x_n)) \leq D(\textbf{x}, h(x_N)) +
+  D(h(x_N),h(x_n)) < \epsilon$. So that $h(x_n) \to \textbf{x}$ and
+  hence $X$ is dense in $Y$.
+\item [\textbf{(d)}] We are given that every Cauchy sequence in $A$
+  converges in $(Z,\rho)$. Suppose that $\seq{z}{n}$ is a Cauchy
+  sequence in $Z$. We need to prove that it converges as well. Well,
+  to each $z_k$ we can find an $a_k \in A$ such that $\rho(a_k,z_k)
+  \leq \epsilon/3$ for any choice of $\epsilon > 0$. Then we can see
+  that $\seq{a}{n}$ is Cauchy because for sufficiently large $n,m$ we
+  have that
+  \[
+  \rho(a_n,a_m) \leq \rho(a_n,z_n) + \rho(z_n, z_m) + \rho(z_m,a_m)
+  \leq 3(\epsilon/3)
+  \]
+  Whenever $n,m$ are chosen large enough that $\rho(z_n,z_m) \leq
+  \epsilon/3$. So $a_k$ is a Cauchy sequence as well. As a result, it
+  must converge in $Z$, say to $a$. We will see that $z_n \to a$ as
+  well. Indeed we use the triangle inequality to see that
+  \[
+  \rho(z_n,a) \leq \rho(z_n,a_n) + \rho(a_n,a)
+  \]
+  We can pick $n$ large enough that $\rho(a_n,a) \leq \epsilon/2$ and
+  the result follows.
+\item [\textbf{(e)}] By the previous part, it suffices to show that
+  every Cauchy sequence in the dense subspace $h(X)$ converges in
+  $Y$. Let $\textbf{y}_k$ be a Cauchy sequence in $h(X)$, where each
+  $\textbf{y}_k = (y_k, y_k, \ldots)$. Since $h$ is an isometry we see
+  that $d(y_n,y_m) = D(\textbf{y}_n, \textbf{y}_m)$ for each pair
+  $n,m$. Hence, we see that $(y_1,y_2,\ldots)$ is a Cauchy sequence in
+  $X$. If we set $\textbf{y}^* = (y_1,y_2,\ldots)$ then we want to
+  show that $\textbf{y}_n \to \textbf{y}^*$. Choose $\epsilon > 0$ and
+  note that there is an $N$ such that $d(y_n,y_m) < \epsilon/2$ for
+  any $n,m > N$. So for each $m \geq N$ we have that
+  \[
+  D(\textbf{y}_m, \textbf{y}^*) = \lim_{n\to\infty} d(y_m,y_n) \leq \epsilon/2
+  \]
+  So we see that $\textbf{y} \to \textbf{y}*$ and we are done.
+\end{enumerate}
+
+\exercise{43.10}
+\begin{thm}[Uniqueness of the Completion]
+  Let $h: X \to Y$ and $h':X \to Y'$ be isometric imbeddings of the
+  complete metric space $(X,d)$ in the complete metric spaces $(Y,D)$
+  and $(Y',D')$, respectively. Then there is an isometry of
+  $(\overline{(h(X)}, D)$ with$(\overline{(h'(X)}, D')$ that equals
+  $h'h^{-1}$ on the subspace $h(X)$.
+\end{thm}
+\begin{proof}
+  This is another situation that is made clear with a diagram
+  \[
+  \begin{xy}
+    (0,0)*+{X}="X"; (-15,-15)*+{Y}="Y";
+    (15,-15)*+{Y'}="Y'";
+    {\ar_{\mathlarger{h}} "X";"Y"};
+    {\ar^{\mathlarger{h'}} "X";"Y'"};
+    {\ar@{<.>} "Y";"Y'"};
+  \end{xy}
+  \]
+  We need to ``connect the dots'', so to speak. We can construct an
+  isometry from the image of $h(X) \subset Y$ to the image $h'(X)
+  \subset Y'$ by composing the maps above, namely, $h'\circ h^{-1}$ is
+  the desired isometry. It is clear that this is an isometry because
+  $h,h'$ are isometries and hence, continuous, injective, and distance
+  preserving, which are all properties preserved under composition.
+
+  Then we use the fact that $h(X)$ and $h'(X)$ are dense in $Y$ and
+  $Y'$, respectively to extend $h'\circ h^{-1}$ to some continuous map
+  $\varphi: Y \to Y'$ that agrees with $h'\circ h^{-1}$ on $h(X)$ by
+  defining $\varphi(x) = \lim_{n\to\infty} \varphi(x_n)$ whenever $x_n
+  \to x$ in $Y$. This sequence converges in $Y'$ because it is Cauchy
+  and $Y'$ is complete. Because limits are unique in metric spaces,
+  the map $\varphi$ is well-defined.
+
+  We now need to verify that $\varphi$ is an isometry. To see that
+  $\varphi$ is surjective we note that if $y \in Y'$ if we let $u_n$
+  be a sequence in $h'(X)$ with limit $y$ then we consider the
+  sequence of preimages $\varphi^{-1}(u_n)$ in $Y$. Because the space
+  $Y'$ is Hausdorff we must have that
+  \[
+  \lim_{n\to\infty}\varphi(\varphi^{-1}(u_n)) = \lim_{n\to\infty} u_n = u
+  \]
+  as desired.
+
+  For injectivity suppose that $\lim_{n\to\infty} \varphi(u_n) =
+  \lim_{n\to\infty} \varphi(v_n)$ and $\lim_{n\to\infty} u_n = u$ and
+  $\lim_{n\to\infty} v_n = v$. Fix an $\epsilon > 0$ and choose $M$
+  large enough that $D'(\varphi(u_n), \varphi(v_n)) < \epsilon$ for all
+  $n > M$. Then we have that
+  \[
+  D(u_n, v_n) = D'(\varphi(u_n), \varphi(v_n)) \leq \epsilon
+  \]
+  since $x$ is Hausdorff we conclude that $u = v$ and so $\varphi$ is
+  injective.
+
+  Finally, we note that the map $\varphi: \overline{h(X)} \to
+  \overline{h'(X)}$ is continuous, because it is the continuous
+  extension of $h' \circ h^{-1}$ and moreover it is bijective, and
+  isometric, and thus is the desired function.
+\end{proof}
+
+\section{Section 45: Compactness in Metric Spaces}
+\exercise{45.3}
+\begin{thm}[Arzela's Theorem]
+  Let $X$ be compact; let $f_n \in \mathcal{C}(X, \R^k)$. If the
+  collection $\{f_n\}$ is pointwise bounded and equicontinuous, then
+  the sequence $f_n$ has a uniformly convergent subsequence.
+\end{thm}
+\begin{proof}
+  We begin with the following
+  \begin{lem}[Exercise 31.4]
+    Every compact metrizable space is separable.
+  \end{lem}
+  \begin{proof}
+    For each integer $n$ consider a covering of the compact space $X$
+    by a ball of radius $1/n$ centered at each point of $X$. Because
+    $X$ is compact, we can extract a finite subcover. If we take the
+    union of all such subcovers we are left with a countable set of
+    balls that we claim is a countable base for $X$. Indeed, given an
+    open set $U$ in $X$ that contains $x$ there is a $\delta > 0$ such
+    that $B_\delta(x) \subset U$. If we choose $n$ such that $1/n <
+    \delta/2$ then we can find some $i$ such that $x \in B_{1/n}(x_i)
+    \subset B_\delta(x)$ because we chose $1/n < \delta/2$ we have
+    that $B_{1/n}(x_i)$ is an element that contains $x$ and is
+    contained in $U$. So we have found our countable base.
+
+    Constructing the countable dense subset from this point is clear,
+    we simply choose one point from each of the balls in out countable
+    base and call this set $E$. I claim that $E$ is our countable
+    dense subset. $E$ is clearly countable, so we need only verify
+    that it is dense. We will show that $\overline{E}^c =
+    \emptyset$. We have that $\overline{E}^c$ is open because its
+    complement is closed. As a result, we use our base of balls to
+    find some base element that is contained in $\overline{E}^c$, say
+    $B_\delta(x_i)$. This implies that $x_n \in \overline{E}^c$. But
+    this is impossible because $x_n \in E$ means that $x_n \in
+    \overline{E}$. This contradiction shows that $\overline{E}^c$ is
+    empty and so $E$ is a countable dense subset of $X$.
+  \end{proof}
+  We can now apply the lemma to the space $X$ to get a countable dense
+  subset $E = \{x_1,x_2,\ldots\}$ in $X$. Our next goal is to capture
+  the convergence of a subsequence of the $f_n$ by keeping track of
+  which indices correspond to the sequence of convergent
+  functions. More precisely, we have the following
+  \begin{claim}
+    There exists a decreasing chain of infinite sets $C_0 \supset C_1
+    \supset C_2 \supset \cdots$ with the property that
+    $\lim_{n\to\infty} f_n(x_j)$ exists for $j \leq k$ if $n \to
+    \infty$ within $S_k$.
+  \end{claim}
+  \begin{proof}
+    The idea is that each of the $C_k$ captures the indices of a
+    subsequence of the $f_n$ that converges. With this in mind, we set
+    $C_0 = \N$ and consider the set of points $\{f_n(x_k) \suchthat n
+    \in C_0\}$ is a bounded sequence in $\R^k$ and therefore has a
+    convergent subsequence. Let $C_1$ be the indices of the elements
+    of the convergent subsequence. then $C_1 \subset C_0$ and $C_1$ is
+    infinite. We continue inductively defining $C_k$ by considering
+    the set $\{f_n(x_k) \suchthat n \in C_{k-1}\}$. As before, this is
+    a bounded sequence in $\R^k$ and has a convergent subsequence and
+    we set $C_k$ to be the set of indicees of that convergent
+    subsequence. So we have that we have that $f_n(x_k)$ exists as
+    $n\to\infty$ within $C_k$. This completes the construction.
+  \end{proof}
+  Let $i_k$ be the $k^{\text{th}}$ term of $C_k$ in the preceeding
+  lemma and set
+  \[
+  C = \{i_1, i_2, \ldots\}
+  \]
+  By construction, there are at most $k-1$ terms of $C$ that are not
+  in $C_k$ and so $\lim_{n\to\infty} f_n(x)$ exists for every $x\in E$
+  as $n\to\infty$ within $C$.
+
+  Now choose an $\epsilon > 0$ and apply the equicontinuity of the
+  $f_n$ to find a $\delta > 0$ such that $d(p,q) < \delta$ implies
+  that $|f_n(p) - f_n(q)| < \epsilon/3$ for all $n$. Cover $X$ with a
+  set of balls of radius $\delta/2$ centered at each point. Because
+  $X$ is compact we can find a finite subcover $B_1, B_2,\ldots, B_M$
+  of open balls. Because $E$ is dense in $X$ there are points $p_i \in
+  B_i \cap E$ for $i \leq M$. Moreover, we see that $p_i \in E$ implies
+  that $\lim_{n\to\infty} f_n(p_i)$ exists within $C$. Hence, we can
+  find an integer $N$ large enough that $|f_m(p_i) - f_n(p_i)| <
+  \epsilon/3$ for $i \leq M$ and $n,m > N$ and $n,m \in C$.
+
+  Now we just use the triangle equality to get the uniform
+  convergence. Pick an $x\in X$. then $x \in B_i$ for some $i$ and
+  $d(x,p_i) < \delta$. If we choose $\delta$ and $N$ as above we have that
+  \begin{align*}
+    |f_m(x) - f_n(x)| &\leq |f_m(x) - f_m(p_i)| + |f_m(p_i) -
+    f_n(p_i)| + |f_n(p_i) - f_m(x)| \\
+    &\leq \epsilon/3 + \epsilon/3 + \epsilon/3 \\
+    &\leq \epsilon
+  \end{align*}
+  whenever $m,n > N$ and $m,n \in S$. This is precisely what it means
+  for this subsequence to converge uniformly.
+\end{proof}
+
+\exercise{43.5}
+\begin{thm}
+  Let $X$ be a locally compact Hausdorff space and let
+  $\mathcal{C}_0(X,\R)$ be the space of continuous functions on $X$
+  that vanish at infinity with the uniform topology. A subset
+  $\mathcal{F}$ of $\mathcal{C}_0(X,\R)$ has compact closure if and
+  only if it is pointwise bounded, equicontinuous, and vanishes
+  uniformly at infinity.
+\end{thm}
+\begin{proof}
+  Let $X$ be a locally compact Hausdorff space. Then $X$ admits a
+  one-point compactification $Y = X \cup \{\Omega\}$. We then define a map
+  \begin{align*}
+  F: \mathcal{C}_0(X,\R) &\to \mathcal{C}(Y,\R) \\
+  f &\mapsto \bar{f}
+  \end{align*}
+  Where $\bar{f}$ is defined by
+  \[
+  \bar{f}(x) =
+  \begin{cases}
+    f(x) & x \in X \\
+    0 & x = \Omega
+  \end{cases}
+  \]
+  Then we first establish the following
+  \begin{claim}
+    The function $\bar{f}$ as defined above is continuous under the
+    hypotheses of the theorem.
+  \end{claim}
+  \begin{proof}
+    It is clear that $\bar{f}$ is continuous on $X$ because $\bar{f}$
+    restricts to $f$ on $X$ and $f$ is continuous. So we only need to
+    check that $\bar{f}$ is continuous at $\Omega$. Let $U$ be a
+    neighborhood of $0$ in $\R$, then we have that $g^{-1}(U)$
+    contains $\Omega$. We can find some interval $(-\delta, \delta)
+    \subset U$, and use the fact that $\bar{f}$ vanishes at infinity
+    to get some compact $K$ in $X$ such that $f(X - K) \subset
+    (-\delta, \delta)$ and so $Y-K \subset \bar{f}^{-1}(U)$ and $Y-K$
+    is a neighborhood of $\Omega$ in $Y$. Hence, $\bar{f}$ is
+    continuous at $\Omega$.
+  \end{proof}
+  Now we introduce the metric structure on $\mathcal{C}_0(X,\R)$ and
+  $\mathcal{C}(Y,\R)$. Let $d_0,d$ be the metrics induced by the
+  sup-norm on $\mathcal{C}_0(X,\R)$ and $\mathcal{C}(Y, \R)$. Note
+  that these metrics are well-defined because continuous functions on
+  $X$ are necessarily bounded. We want to show that $E$ is an isometry
+  of $\mathcal{C}_0(X,\R)$ with a closed subspace of
+  $\mathcal{C}(Y,\R)$. Indeed, pick $f,g \in \mathcal{C}_0(X,\R)$ and
+  observe that
+  \begin{align*}
+    d_0(f,g) &= \sup_{x\in X} |f(x) - g(x)| \\
+    &= \sup_{x \in Y}|\bar{f}(x) - \bar{g}(x)| \\
+    &= d(\bar{f},\bar{g})
+  \end{align*}
+  Note that equality holds moving from the first line above to the
+  second because the point at infinity only adds $0$ to a set of
+  non-negative numbers, and therefore will not be the supremum unless
+  $f$ is identically zero on $X$ and equality holds nonetheless. $E$
+  is also continuous because we simply take $\epsilon =
+  \delta$. Hence, $E$ is a continuous, bijective and distance
+  preserving map, and therefore an isometry (and, consequently, a
+  homeomorphism).
+
+  Next, we need to find how $E(\mathcal{C}_0(X,\R))$ sits inside of
+  $\mathcal{C}(Y,\R)$. Because each of the $f \in \mathcal{C}_0(X,\R)$
+  vanishes at infinity, the corresponding $\bar{f} \in
+  \mathcal{C}(X,\R)$ must satisfy $g(\Omega) = 0$. This follows from
+  the fact that $\bar{f}$ is continuous and bounded above by
+  $\epsilon$ outside of an arbitrarily large compact set. Because we
+  can find such a set for each $\epsilon$, we can let $\epsilon \to 0$
+  and get that $f(x) \to 0$ as $x \to \Omega$. Then continuity
+  guarantees that we can exchange limiting operation and function
+  application so
+  \[
+  \lim_{x \to \Omega} f(x) = f(\lim x \to \Omega) = 0
+  \]
+
+  Now we will see that $E(\mathcal{C}_0(X,\R))$ is closed. Well, we
+  recall that each of the functions in $E(\mathcal{C}_0(X,\R))$ are
+  equal to 0 when evaluated at $\Omega$. Hence, if we consider the
+  evaluation map given by
+  \begin{align*}
+    A: Y \times \mathcal{C}(Y, \R) &\to \R \\
+    x \times f \to f(x)
+  \end{align*}
+  Well $E(\mathcal{C}_0(X,\R)) = A^{-1}(0)$, which is the inverse
+  image of a closed set (singletons are closed in $\R$) under a
+  continuous function, and is thus closed.
+
+  Now we are at a point where we can apply the Ascoli theorem. We have
+  seen that $E(\overline{\mathcal{F}})$ is a homemorphism. Then we
+  apply Ascoli's theorem to $E(\mathcal{F})$ and get that it has
+  compact closure if and only if it is equicontinuous and pointwise
+  bounded. Above, we saw that this happens if and only if
+  $\mathcal{F}$ is pointwise bounded, equicontinuous, and vanishes
+  uniformly at infinity. We then apply the fact that $E$ is a
+  isometric homeomorphism so that $E(\overline{\mathcal{F}}) =
+  \overline{E(\mathcal{F})}$. And so $\mathcal{F}$ as compact closure
+  if and only if it is equicontinuous, pointwise bounded, and vanishes
+  uniformly at infinity.
+\end{proof}
+
+\section{Section 46: Pointwise and Compact Convergence}
+\exercise{46.7}
+
+ We begin with a map
+\begin{align*}
+  \Phi: \mathcal{C}(X,Y) &\times \mathcal{C}(Y,Z) \lra \mathcal{C}(X,Z) \\
+  f &\times g \lra g\circ f
+\end{align*}
+which is the composition operator on the two function spaces. To show
+that $\Phi$ is continuous, we will prove that the inverse image of
+each open sub-basis element is open. Indeed, consider the set open
+$(K,U)$ where $K$ is compact in $X$ and $U$ is open in $Z$. Suppose
+that $(f,g) \in \Phi^{-1}(K,U)$ so that (following the hint) $f(K)
+\subset g^{-1}(U)$. Because $f(K)$ is compact, $g^{-1}(U)$ is open in
+$Y$, and $X$ is locally compact and regular we can (APPLY A THEOREM
+TO) see that there is some compact subset $L$ such that $f(K) \subset
+\text{int}(L)$ and $L \subset g^{-1}(U)$. The set $(K,\text{int}(L))
+\times (L, U)$ is an open set in $\mathcal{C}(X,Y) \times
+\mathcal{C}(Y,Z)$. Furthermore, it contains the point $(f,g)$.
+
+So if we pick any $h \in (K, \text{int}(L)$ and $i \in (L, U)$ then we have
+\[
+(i\circ h)(K) \subset i(\text{int}(K)) \subset i(L) \subset U
+\]
+This implies that $(h,i) \in (K,U)$. We have shown that
+\[
+(K,\text{int}(L)) \times (L, U) \subset \Phi^{-1}(K,U)
+\]
+So $\Phi^{-1}(K,U)$ is open, and so $\Phi$ is continuous.
+
+\section{Section 48: Baire Spaces}
+\exercise{48.7}
+\begin{thm}
+  If $D$ is a countable dense subset of $\R$, there is no function $f:
+  \R \to \R$ that is continuous precisely at the points of $D$.
+\end{thm}
+\noindent{\textit{Proof.}}
+\begin{enumerate}
+\item [\textbf{(a)}] Following the hint for the problem we begin by
+  noting the following
+  \begin{lem}
+    Given a function $f: \R \to \R$ we have the following
+    \begin{enumerate}
+    \item[\textbf{(i)}] $f$ is continuous if and only if
+      \[
+      D_f(x)\lim_{\substack{x\in U\\ \diam{U} \to 0}} \diam{f(U)} = 0
+      \]
+    \item[\textbf{(ii)}] The set
+      \[
+      E_n = \{x \in \R \suchthat D_f(x) < 1/n\}
+      \]
+      is open.
+    \end{enumerate}
+  \end{lem}
+  \begin{proof}
+    For the first claim, this is just the definition of continuity in
+    $\R$ phrased in the language of diameters. If $f$ is continuous
+    then we have for any $\epsilon > 0$ we can find $\delta > 0$ such
+    that $|x-y| < \delta$ implies $|f(x) - f(y)| < \epsilon$. If you
+    give an epsilon and the limit holds, then we simply choose the
+    first $U$ such that the diameter is less than $\epsilon$ and set
+    $\delta = \diam(U)$. Conversely, if $f$ is continuous, then we
+    simply say that for each $U$ containing $x$ we have that $\diam(U)
+    \to 0$ implies that $|x-y| \to 0$ for $y \in U$. This immediately
+    gives the result.
+
+    For the second part, note that if $x \in E_n$ then we can find
+    some $U$ such that $\diam{U}< \delta$ so that $\diam{f(U)} <
+    1/n$. So if $y \in B_{\delta/2}(x)$ then $y \in E_n$ because
+    \[
+    \sup_{p,q \in B_{\delta/2}(y)}|f(p) - f(q)| \leq \sup_{p,q in
+      B_{\delta(x)}} |f(p_ - f(q)| < 1/n
+    \]
+    So $B_{\delta/2}(x)$ is an open ball containing $x$ that is wholly
+    contained in $E_n$, hence $E_n$ is open.
+  \end{proof}
+  This lemma shows that we can write
+  \[
+  C = \bigcap_{n=1}^\infty E_{n}
+  \]
+  where $C$ are the points of continuity of $f$.The first part of the
+  lemma says the points int the intersection are precisely the
+  continuity points of $f$ and the second part of the lemma verifies
+  that this set is a $G_\delta$, as desired.
+\item [\textbf{(b)}] The result is an immediate consequence of the following
+  \begin{lem}
+    A dense $G_\delta$ set in $\R$ is generic.
+  \end{lem}
+  \begin{proof}
+    Suppose that $Y$ is a dense $G_\delta$ set. Then we can write $Y =
+    \bigcap_{n=1}^\infty U_n$, where each of the $U_n$ is open and
+    dense (each must be dense because otherwise the intersection could
+    not be). Suppose to the contrary that $Y$ is of the first category
+    and we could also write $Y = \bigcup_{n=1}^\infty$, where each one
+    of the $W_n$ is nowhere dense. We then note that each of the
+    $U_n^c$ is nowhere dense and rewrite
+    \[
+    \R = Y \cup Y^c = \bigcup_{n=1}^\infty W_n \cup \bigcup_{n=1}^\infty U_n^c
+    \]
+    Then $\R$ is the countable union of nowhere dense sets, and
+    therefore is first category in itself. which contradicts the Baire
+    Category theorem.
+  \end{proof}
+  Applying this lemma gives immediately that if $D$ is a countable
+  dense set, then $D$ cannot be $G_\delta$, and therefore cannot be
+  the set of continuity points of any function because by the previous
+  part, those must be $G_\delta$.
+\end{enumerate}
+\hfill\qedsymbol
+
+\exercise{48.8}
+\begin{thm}[Uniform Boundedness Principle]
+  Let $X$ be a complete metric space and let $\mathcal{F}$ be a subset
+  of $\mathcal{C}(X,\R)$ such that for each $a \in X$ the set
+  \[
+  \mathcal{F}_a = \{f(a) \mathrel{|} f \in \mathcal{F}\}
+  \]
+  is bounded. Then there is a nonempty open set $U$ of $X$ on which
+  the functions in $\mathcal{F}$ are uniformly bounded, that is, there
+  is a number $M$ such that $|f(x)| \leq M$ for all $x \in U$ and $f
+  \in \mathcal{F}$.
+\end{thm}
+\begin{proof}
+  We will begin by proving the result for sets $Y \subseteq X$ of the
+  second category and the theorem will follow because $X$ is a compact
+  metric space, and therefore a Baire space.
+
+  Following the hint, we begin by assigning to each integer $N$ the set
+  \[
+  A_n = \{x\suchthat \forall f \in \mathcal{F}, |f(x)| \leq N\}
+  \]
+  Then, the fact that each of the $\mathcal{F}_a$ is bounded allows us
+  to write
+  \[
+  A = \bigcup_{N = 1}^\infty A_N
+  \]
+  We then note that each the $A_N$ must be closed because we can write
+  \[
+  A_N = \bigcap_{f \in \mathcal{F}} A_{N,f}
+  \]
+  And each of the $A_{N,f} = \{f\suchthat |f(x)| \leq N\}$ must be
+  closed because $f$ is assumed continuous.
+
+  Because $A$ is second category there is $A_N$ for some sufficiently
+  large $N$ that must have a non-empty interior. So we can find an
+  $x_0 \in X$ and an $r > 0$ such that the ball $B_r(x_0)$ is
+  contained in $A_N$. For each of the $f \in \mathcal{F}$, we get $x
+  \in B_r(x_0)$ implies that $|f(x)| \leq N$. This is the open ball
+  that we were looking for by construction.
+\end{proof}
+
+\section{Section 55: Retractions and Fixed Points}
+
+\exercise{55.3}
+
+ Consider the intersection of the sphere with the first
+octant (all non-negative coordinates) in $\R^3$. Graphically, this is
+one ``slice'' of $S^2$ in 3-space. We know how to parameterize such a
+space via polar coordinates, as $(r,\theta, \phi)$. All we do need to
+do is make sure that the map from our slice to the whole sphere is a
+homeomorphism. this is clear if we simply use the map $(r,\theta,
+\phi) \mapsto (r, 4\theta, 4\phi)$. Each of these component maps is
+linear and hence continuous and bijective, so this is a homeomorphism. 
+
+Because $A$ has no singularities and each of the components of $B$ are
+non-negative. We can then map the $F: B \to B$. Because $Ax$ is all
+non-negative We have that this map is well defined as $F(x) =
+Ax/\norm{Ax}$. Because $B$ is homeomorphic to itself we can apply
+Brower's fixed point theoerm and then see immediatly that
+\[
+Ax_0/\norm{Ax_o} \text{ implies } Ax_0 = \norm{Ax_0}x_0
+\]
+So again, this is the same as
+\[
+Ax_0 = \norm{Ax_0}x_0
+\]
+The right hand side is a non-negative constant and the formula
+immediately gives that $x_0$ is indeed an eigenvector.
+
+\section{Section 57: The Borsuk-Ulam Theorem}
+
+\exercise{57.2}
+
+Suppose that $g$ were not surjective and let $p$ be a point in the
+complement of the image of $g$. Then define a map $h: S^2-\{p\} \to
+\R^2$ to be a homeomorphism (following the hint). So we can define a
+continuous function $f: S^2 \to \R^2$ by $f = h\circ g$. We then apply
+the Borsuk-Ulam theorem to find a pair of points such that $f(x) =
+f(-x)$, and because $h$ was a homeomorphism we see that this must be a
+contradiction. This shows that $g$ must be surjective.
+
+\end{document}
