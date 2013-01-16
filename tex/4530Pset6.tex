@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 6}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\begin{document}
+\problem{3.26.5} Suppose that we are given two sets $A,B$ that are disjoint compact subspaces of the Hausdorff space $X$. Because we assumed that $A$ and $B$ are disjoint we know that any $a \in A$ is not in $B$. This means that we now satisfy the hypotheses for Lemma 26.4, which we apply to find two open sets $U_a$ and $V_a$ such that $a \in U$ and $B \subset Y$. We then note that 
+\[
+A \subset \bigcup_{a\in A} U_a
+\]
+and
+\[
+B \subset \bigcap_{a \in A} V_a
+\]
+Because each of the $U_a$ is open we must also have that their union is open, and hence an open cover of $A$. We then apply compactness of $A$ to extract a finite subcover $\{U_j\}_{j=1}^n$. Then we note that 
+\[
+A \subset \bigcup_{j=1}^n U_j
+\] 
+and 
+\[
+B \subset \bigcap_{j=1}^n V_j
+\]
+It is clear that $\bigcup_{j=1}^n U_j$ and $\bigcap_{j=1}^n U_j$ are both open because they are the finite union and intersection of open sets, respectively. These collections are disjoint by construction and so we are done. 
+
+\problem{3.26.11} We need to prove the following
+\begin{thm}
+Let $X$ be a compact Hausdorff space. Let $\mathcal{A}$ be a collection of closed connected subsets of C that is simply ordered by proper inclusion. Then
+\[
+Y = \bigcap_{A \in \mathcal{A}} A
+\]
+is connected.
+\end{thm}
+\begin{proof}
+Suppose to the contrary that $Y$ is not connected. Then we must have some separation of $Y$ into open sets $C$ and $D$ with $Y = C \cup D$. Then each of $C$ and $D$ is closed because they are each the intersection of nested (due to the ordering) compact sets in a Hausdorff space. As a reult of this we can apply the result from Exercise 5 to find to disjoint open sets $U$ and $V$ such that $C \subset U$ and $D \subset V$. As a result of this fact we must that for any $A \in \mathcal A$ that $A - (U \cup V)$ is closed because $U \cup  V$ is open and $A$ is closed. Furthermore, we have that the sets $\{A - (U\cup V)\}$ are a nested collection of closed sets because $\{A\}$ is a nested collection of sets. As a result we see that  
+\[
+B = \bigcap_{A \in \mathcal{A}} (A - (U\cup V))
+\]
+must be nonempty because it is the intersection of nested closed sets in a Hausdorff space, and therefore non-empty. This means we can find $b \in B$ that is in neither $U$ nor $V$. But this is impossible because  
+\[
+B \subset Y = (C \cup D) \subset (U \cup V)
+\]
+This contradiction establishes the result. 
+\end{proof}
+
+\problem{3.26.12} We begin with the following
+\begin{lem}
+Let $p: X \to Y$ be a perfect map and $y$ an element of $Y$. Then if $U$ is an open set such that $p^{-1}(\{y\}) \subset U$ there must be a neighborhood $W$ of $y$ such that $p^{-1}(W) \subset U$
+\end{lem}
+\begin{proof}
+Let $U$ be the open set described above. Because $U$ is open we know $U^c$ is closed. As a result of this we see that $p(U^c)$ must also be closed because $p$ is a perfect, hence closed, map. We then set 
+\[
+W = (p(U^c))^c
+\] 
+Which means $W$ is an open set in $Y$ containing $y$. Then we note that $p$ is continuous and so $p^{-1}(W)$ is open in $X$ and must be disjoint from $U^c$ by construction. This means $W \subset (U^c)^c = U$ and so we are done.  
+\end{proof}
+With this lemma in hand we now proceed to show that $Y$ is compact then $X$ must also be compact. We begin with some open cover $\{\mathcal{O}_\alpha\}_{\alpha \in \mathcal{A}}$ of $X$. We will show that this cover has a finite subcover. Let $\mathcal{C} \subset Y$ be compact. Consider its inverse image $p^{-1}(\mathcal{C}) \subset X$. For every $y \in \mathcal{C}$ the compact space $p^{-1}(y)$ is contained in a finite collection of the $\{\mathcal{O}_\alpha\}_{\alpha \in \mathcal{A}(y)}$. There is a neighborhood $W_y$ of $y$ such that $p^{-1}(W_y)$ is contained in this union. By the compactness of $\mathcal{C}$ only finitely many of these $W_{y_j}$ cover $Y$. This means
+\[
+p^{-1}(\mathcal{C}) \subset \bigcup_j \bigcup_{\alpha \in \mathcal{A}(y)} \mathcal{O}_{\alpha}
+\]
+is a finite cover of $p^{-1}(\mathcal{C})$ and so we are done. 
+ 
+\problem{3.27.5} Let $\mathcal{O}$ be a nonempty subspace of $X$. We no that $\mathcal{O} \not\subset A_1$ because $A_1$ has no interior. So the set $\mathcal{O} - A_1$ is open and non-empty. We then apply Lemma 31.1 to find a nonempty open set $\mathcal{O}_1$ such that
+\[
+\mathcal{O}_1 \subset \overline{\mathcal{O}} \subset (\mathcal{O} - A_1) \subset \mathcal{O}
+\]
+We can continue this process indefinitely because each of the $A_n$ has no interior and each of the $\mathcal{O}_{n-1} - A_n$ will be open.  This will lead us to a decreasing sequence of non-empty sets $\mathcal{O}_n \subset \mathcal{O}_{n-1} \subset \cdots$ for every $n$. Because we know that $X$ is compact we have that $M = \bigcap \mathcal{O}_n = \bigcap\overline{\mathcal{O}_n} \neq \emptyset$. Moreover, we have that
+\[
+\mathcal{O} \cap \bigcap (X - A_n) = \mathcal{O} - \bigcup A_n
+\]
+This completes the proof. 
+
+\problem{3.27.6}
+\problempart{a} It is apparent from the definition that the set $A_n$ is the disjoint union of $2^n$ closed intervals of length $3^{-n}$. Pick two points $x,y \in C$ with $x < y$ and choose $n$ such that $|x-y| > 3^{-n}$. Then because $\R$ is Hausdorff with the standard topology we can find a point $r$ such that $x < r < y$ such that $r \not\in A_n$, and therefore $r\not\in C$. This means that any subspace of $C$ containing $x$ and $y$ has a separation (c.f. pg 149). 
+
+\problempart{b} It is clear that $C$ is closed because it is defined as the complement of open intervals. We appeal to Theorem 26.2 to see that because $C$ is a closed subset of the compact space $[0,1]$ that it must be compact. 
+
+\problempart{c} We proceed by induction. The base case is clear because $A_0 = [0,1]$ has length $3^{0} = 1$. for the inductive step we suppose that $A_{n-1}$ is the union of finitely many disjoint closed intervals of length $3^{-n}$. For each of these intervals we remove finitely many disjoint open intervals of length $3^{-(n+1)}$ from them. The remainder is a finite set of disjoint closed intervals of length $3^{-(n+1)}$. Iterating this process finitely many times yields a finite collection of disjoint closed intervals in $A_n$. This completes the induction. TO see that the the endpoints of each of these intervals is in $C$ is clear, because the endpoints are the boundary points of the intervals, and from the definition we only ever remove interior points from any interval. Hence, the endpoints of every $A_n$ are contained in $C$.   
+ 
+\problempart{d} It is clear from the construction of $C$ that it removes only the interior points of the $A_n$. Therefore, the boundary of $A_n$ is contained in $C$ for every $n$. As a result any interval of length $3^{-(n+1)}$ around any point of $A_n$ contains a boundary point of $A_{n+1}$, and therefore a point of $C$. So $C$ has no isolated points.  
+
+\problempart{e} $C$ is a nonempty compact Hausdorff space with no isolated points. Therefore it meets the criteria of Theorem 27.7 and is compact. 
+
+
+\end{document}

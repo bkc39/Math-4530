@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.5in,rmargin=1.5in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 6110 Problem Set 9}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+
+\DeclareMathOperator{\im}{\text{im}}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\begin{document}
+\problem{4.34.4} Let $X$ be a locally compact Hausdorff space. Then $X$ admits a one-point compactification, and is a subset (with the induced subspace topology) of a compact Hausdorff space. Any compact Hausdorff space must be normal, and therefore completely regular by the Urysohn Lemma. We then use the fact that complete regularity is preserved in the subspace topology on $X$. We then use the fact that $X$ is second-countable to apply the Urysohn metrization theorem and see that $X$ is metrizable. However, being metrizable does not imply that $X$ has a countable basis. A trivial counterexample is any uncountable space with the discrete topology, such as the interval $[a,b]$ in the discrete topology. It clearly is metrizable with the metric induced by $\R$, but admits no countable basis because each singleton is open and there are uncountably many of them.  
+
+\problem{4.35.4}
+\problempart{a} Let $Z$ be a Hausdorff space and $Y$ a retract of $Z$. We want to show that $Y$ must be closed. We will see that $Z - Y$ is open. Indeed, choose any point $z \in Z - Y$, and apply the retraction map $r$ to get some point $y = r(z) \in Y$. Because $Z$ is Hausdorff we can disjoint neighborhoods $U,V$ of $z$ and $y$, respectively. Then we have that that $y \in V \cap Y$, which is an open neighborhood in $Y$. We set $I = r^{-1}(V\cap Y)$, which is open in $Z$ because $r$ is continuous and observe that $I$ contains both $z$ and $y$. If $x \in I \cap Y$ then we have that $x = r(x) \in V$. Moreover, we must have $x \not\in U$. So for each $x \in U \cap I$ we see $x \not\in Y$. So we have that $Z - Y$ is open and therefore $Y$ is closed.   
+
+\problempart{b} This is clear. Suppose there were such a retraction map and look at the fiber over each point: each one must be open and non-empty and are therefore a separation of $\R^2$. Furthermore, the union must be the whole space, which is connected. The two point set is clearly not connected, and so there could be no continuous retraction map. 
+
+\problempart{c} Consider the function $f(x) = x/|x|$. This function is continuous on $\R^2$ everywhere except at the origin. Moreover, we see that if $x \in S^1$ then $|x| = 1$ and so $f(x) = x$ for $x \in S^1$. Hence, this is our retraction map. However, we can see that $S^1$ is not a retract of $\R^2$. The reason for this is that the introduction of the origin forces there to be some discontinuity in defining a retraction. Any parameterization of the circle would have to be fixed under the retraction. But we can define maps on the interior of the circle that shrink each of these paths to a point (like $f_n(x) = \alpha^nx$ with $\alpha < 1$). This leads to a contradiction, because that means that it could not fix the parameterization of the circle. 
+
+\problem{4.35.5}
+\problempart{a} This is clear if we appeal to the Tietze extension theorem. We simply apply the theorem to extend the function $f: A \to \R$ to a function $g: X \to \R$ that is continuous. We then define the function $h: X \to \R^J$ such that $h(x) = (g(x), (g(x), \ldots)$. Then each of the component functions is continuous so $h$ is continuous (when $\R^J$ is given the product topology). 
+
+\problempart{b} We are given the map $f: A \to Y$ is continuous and we know there is some homeomorphism $h: Y \to R$ such that $R$ is a retract of $\R^J$. Then $(h \circ f): A \to \R$ is continuous because it is the composition of continuous functions and therefore can be extended to a function $g: X \to \R$ and as a result a continuous function $G: X \to R^J$. Then we see that $h^{-1}\circ r \circ G: X \to Y$ is continuous because $G$ is continuous, $r$ is a retraction (continuous) and $h$ is a homeomorphism.  
+
+\problem{4.35.6}
+\problempart{a} This is clear. We use the homeomorphism $h: Y_0 \to Y$ and extend it to a continuous function on the whole space $f:Z \to Y$. Then clearly $(h^{-1} \circ f): Z \to Y_0$ is a retraction. It is clearly continuous because it is the composition of two continuous functions and for each $y \in Y_0$ we have that  $f(y) = h(y)$ and so $h^{-1}(f(y)) = h^{-1}(h(y)) = y$. 
+
+\problempart{b} Following the hint, we assume that $[0,1]^J$ is normal and plan to construct an imbedding $f: Y \to [0,1]^J$. The plan is to use the Imbedding theorem so we  begin by constructing our family of functions. To each pair $(x, U)$ where $U$ is a neighborhood of $x$ we construct the function
+\[
+f_{x,U}(v) = \begin{cases}
+1 & v \in U \\
+0 & v \not\in U
+\end{cases}
+\]
+Then we can construct an imbedding $F(x) = (f_\alpha(x))_{\alpha \in J}$, where $\alpha$ is the index corresponding to each $(x,U)$ pair. If the point $p \in [0,1]^J$ is not in the image of this imbedding, then for every $y \in Y$ we have that there is some $\alpha$ such that $f_\alpha(y) \neq p_\alpha$. Choose disjoint neighborhoods $U_y, V_y$ such that $p \in U_y$ and $f(y) \in V_y$. Then the collection $\{F^{-1}(V_y)\}$ cover $Y$, which is compact and therefore admits a finite subcovering, say $V_{y_1},\ldots, V_{y_n}$. The corresponding intersection of sets $\bigcap_{k=1}^n U_{y_k}$ is a neighborhood of $p$ that is disjoint from the image. That is $[0,1]^J - F(Y)$ is open. Because $Y$ is an absolute retract, we have that $F(Y)$ is a retract of $[0,1]^J$ and therefore has the universal extension property by Exercise 4.35.5.  
+
+\problem{4.35.7}
+\problempart{a} We can see that the logarithmic spiral 
+\[
+C = \{0 \times 0\} \cup \{e^{t}\cos t \times e^t\sin t \suchthat t\in \R\}
+\]
+is a retract of $\R^2$. We will show this by displaying a retraction. Consider the function
+\[
+r(x,y) = \begin{cases}
+\left((x^2+y^2)^{1/2}\cos\log(x^2+y^2)^{1/2}, (x^2+y^2)^{1/2}\sin\log(x^2+y^2)^{1/2}\right) & (x,y) \neq (0,0) \\
+(0,0) & (x,y) = (0,0)
+\end{cases}
+\]
+It is clear that $r$ is continuous except possibly at the origin (by elementary calculus it is the product of continuous functions). We can see that it is also continuous at 0 because the limit as $(x,y) \to (0,0)$ is also 0 (although the coordinate functions do oscillate wildly, they are bounded, and multiplied by a quantity that goes to 0). Now choose $(x,y) \in C$. We need to verify that $r(x,y) = (x,y)$. If $(x,y) = 0$ then the equality holds trivially. Otherwise we note that there is some $t$ such that $(x,y) = (e^t\cos t, e^t\sin t)$. Then we observe that 
+\[
+(x^2+y^2)^{1/2} = (e^{2t}(\sin^2t + \cos^2t))^{1/2} = e^t
+\]
+Then we observe that 
+\[
+\log(x^2+y^2)^{1/2} = \log e^t = t
+\]
+So substituting gives
+\[
+r(x,y) = r(e^t\cos t, e^t\sin t) = (e^t\cos t, e^t\sin t) = (x,y)
+\]
+and so we are done. 
+
+\problempart{b} It is clear that the space $K$ is homeomorphic to $\R$ by the diagram (one can show this by parameterizing it by arc length on every bounded interval). We then use exercises 4.35.5 and 4.35.6 to see that because $K$ is homeomorphic to the normal space $\R$, which is closed as a subspace of $\R^3$, $K$ has the universal extension property, and is also an absolute retract of $\R^3$. Hence, it is also a retract. 
+ 
+\problem{4.36.1} Let $U$ be an open subset of the manifold, $X$, and $u \in U$ a point.  Then there is a neighborhood $V$ or $u$ that is homeomorphic to an open Euclidean space. Set $I = U \cap V$, and observe that $I$ is open in $V$ and is also homeomorphic to a Euclidean space. Suppose that $f$ is the homeomorphism, then we can find a neighborhood $f(N)$ containing $f(u)$ such that its closure is contained in $f(I)$. Then we have that $N$ is a neighborhood of $X$ with the property that $\overline{N} \subset I \subset U$. We then apply the Hausdorff condition to see that this gives the regularity of $X$. To see why this condition is necessary, suppose that we take the line with two origins (considered earlier in the text). This is the standard real line, along with a distinguished point $O$ such that the topology is generated by intervals of the form $(O, x)$ as well as all intervals that would usally contain zero, with the zero element replaced with $O$. This space is clearly a manifold and the proof is identical to the usual topology on $\R$. However there is no separation between $0$ (the usual origin) and $O$ (the new origin) so this space is not Hausdorff. 
+ 
+\problem{4.36.2} The space $X$ is both compact and Hausdorff and therefore normal. We cover it with a finite number of open sets $U_1,\ldots, U_n$, such that each of these sets can be imbedded into $R_{n_k}$ for some $n_k > 0$ and let $\{i_k\}_{k=1}^n$ be the collection of these imbedding maps. WE then apply Theorem 4.36.1 to get a partition of unity $\{\varphi_n\}$, which is dominated by the $U_n$. As in the proof of Theorem 4.36.2 we construct a map $F: X \to \R^{n + n_{k_1} + \cdots + n_{n}}$ is continuous and injective. 
+
+\problem{4.36.3} This is clear. Simply apply the previous problem to see that $X$ can be smoothly imbedded into a second countable space. Hence, $X$ must also be second countable. Because $X$ is hausdorff, compact, and second countable we have that it is indeed an $n$-manifold.
+
+\end{document}

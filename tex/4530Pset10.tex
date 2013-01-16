@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.5in,rmargin=1.5in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 10}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\pnorm}[2]{\|#1\|_{L^{#2}}}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+
+\DeclareMathOperator{\im}{\text{im}}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\begin{document}
+\problem{5.37.3}
+\problempart{a} We will follow the outline of the proof given for the Tychonoff theorem. Let $\{L_\alpha\}_{\alpha \in J}$ be a collection of Lindel\"{o}f spaces indexed by $J$ and define $L = \prod_{\alpha \in J} L_\alpha$. Pick a collection $\mathcal{A}$ with the countable intersection property. By assumption, we can extract a subcollection $\mathcal{D}$ of $\mathcal{A}$ that is maximal with respect to the countable intersection property and still covers $\mathcal{A}$. Consider the canonical projections of the elements of $\mathcal{D}$ onto their $\alpha$ coordinate, namely $\mathcal{D}_\alpha = \{p_\alpha(D) \suchthat D \in \mathcal{D}\}$. Then we must have that $\mathcal{D}_\alpha$ must also have the countable intersection property. Because each of the $L_\alpha$ is Lindel\"{o}f we have that given any $\alpha$ we can find some $\ell_\alpha \in L_\alpha$ such that $\ell_\alpha \in \bigcap_{D} \overline{p_\alpha(D)}$. From each of these $\ell_\alpha$ we can construct an element $\ell = (\ell_\alpha)_{\alpha \in J} \in L$. Consider the inverse image of any open neighborhood $U_\alpha$ about $\ell_\alpha$. Then we must have that $p_\alpha^{-1}(U_\alpha)$ must intersect every element of1 $\mathcal{D}$ by construction. Then we observe that every basis element containing $\ell$ must intersect $\mathcal{D}$ because of hypothesis (ii) and the preceding argument (the projections of the basis elements must contain $\ell_\alpha$). Consequently, we have that $\ell \in \overline{D}$ for each $D$ and therefore $\ell \in \bigcap_{D \in \mathcal{D}}\overline{D}$.   
+
+\problempart{b} Let $\{E_n\}$ be a countable collection of elements of $\mathcal{D}$ and set $E = \bigcap_n E_n$. We then define a new collection $\mathcal{E} = \mathcal{D} \cup \{E\}$ and take a countable subcollection of $\mathcal{E}$. We now consider cases for the constituents of this subcollection. If none of the elements are in $E$ then we must have that the intersection is non-empty because then all it is a countable subcollection of $\mathcal{D}$, which has the countable intersection property. For each element that is in $E$, we can see that this element must be $E \cap \bigcap_n D_n$ for some of the countable collection $D_n$. Because $E$ is a countable intersection of elements of $\mathcal{D}$, we have that this too is a countable intersection of elements of $\mathcal{D}$, and is therefore non-empty. Becuase we assumed that $\mathcal{E}$ was maximal, it cannot be a proper subset of $E \cup \mathcal{D}$. Hence, we must have that $\mathcal{E} = E \cup \mathcal{D}$ and so $E \in \mathcal{D}$. Now suppose that in addition that $Y \subset X$ intersects each element in $\mathcal{D}$. We then set $\mathcal{E} = \mathcal{D}\cup \{Y\}$. Like before, we suppose that if we extract countably many elements from this collection, that none of them are in $Y$, so their intersection must be nonempty. On the other hand if their intersection foes contain $Y$, then it must be of the form $Y \cap \bigcap_n D_n$. Clearly, the right term side is non-empty and $Y$ must intersect everything in the right term by assumption. Hence, this collection must also have the countable intersection property, meaning that $Y \in \mathbb{D}$ and we are done. 
+
+\problempart{c} The part of the prof that breaks down is the assumption that the collection $\mathcal{D}$ exists. In a general Lindel\"{o}f space we may not be guaranteed that such a set exists and therefore the proof given by Munkres fails at this point.
+
+\problem{5.37.4}
+\problempart{a} Let $\mathfrak{B} = \bigcap_{B \in \mathcal{B}} B$. We will see that $\mathfrak{B}$ is closed in $X$ and that $x$ and $y$ lie in the same quasicomponent of $\mathcal{A}$. It is clear that $\mathfrak{B}$ is closed because it is the intersection of closed sets and that $x,y \in \mathfrak{B}$ because $x,y$ are in each of the elements of $\mathcal{B}$. Suppose that there was a separation into $C, D \subset \mathfrak{B}$ disjoint. Then we must have that $C$ and $D$ are closed in $\mathfrak{B}$, which implies further that $C,D$ are closed in $X$. Because $X$ is a compact Hausdorff space we can find open and disjoint open $C_o,D_o$ such that $C \subset C_o$ and $D \subset D_o$. For any $B \in \mathcal{B}$ that $B - (C_o \cup D_o) \neq \emptyset$ because $B \in \mathcal{A}$. Now we consider the ordering of $\mathcal{B}$ to see that the set $\mathcal{U} = \{B - (C_o \cup D_o) \suchthat B \in \mathcal{B}\}$ must have the finite intersection property because we are ordered by inclusion. Because $\mathcal{U}$ contains only closed sets in the compact space $X$, we know that the intersection must be non-empty. However, the intersection of the elements of $\mathcal{U}$ is given by $\mathfrak{B} - (C_o \cup D_o) = \emptyset$ because $C \cup D \subset C_o \cup D_o$. Hence, there could not have been such a separation and so we have that $x,y$ must belong to the same quasicomponent of $\mathcal{A}$.
+
+\problempart{b} For this part we appeal to Zorn's Lemma. We saw that every totally ordered subset of the collection $\mathcal{A}$ must have a lower bound given by $\mathfrak{B} $ above. So by Zorn's lemma we can find the minimal element in $\mathfrak{B}$, say, $D$. 
+
+\problempart{c} As usual, we suppose that it is not connected. So we can find some separation $U,V$ such that $U\cap V = \emptyset$ and $D = U \cup V$.    We take our minimal element $D$ and note that $x$ and $y$ must both lie in the same quasicomponent, say $U$. Because $U$ is closed in $D$ it must also be closed in $X$ and by hypothesis we have that $V \neq \emptyset$ so that $U$ lies properly in $D$. As a result, $U \not\in \mathcal{A}$ because $D$ is the minimal element. As a result of this fact we can find disjoint open $O_1, O_2 $ such that $x \in O_1$ and $y \in O_2$. However, this is impossible because then we get that $O_1 \cup V$ and $O_2$ are disjoint open sets that separate $x$ and $y$ in $D$, which is impossible. Hence, there could not have been such a separation. So we are done. 
+
+\problem{9.51.3}
+\problempart{a} Consider the map $F(x,y) = xy$. Clearly, this map is continuous for each $(x,y) \in \R^2$. If we restrict $y$ to the interval $[0,1]$ then $F$ is a homotopy between the identity and the constant map to zero for both $I$ and $\R$. 
+
+\problempart{b} If $X$ is a contractible space with nullhomotopy $F: X \times I \to X$ and let $x \in X$ be the image of the constant map $F(z,0)$. If $y$ is another point in $X$ then $F(y,t)$ is a path from $y$ to $x$. This precisely means that all the points are in the same path component as $x$. 
+
+\problempart{c} Let $F: Y \times I \to Y$ be a nullhomotopy for $Y$ with $y$ the image of the particular constant map. We construct a homotopy between $f: X \to Y$ and the constant map from $X$ to $y$. This homotopy is the function $H: X \times I \to Y$ defined by $(x,r) \mapsto F(f(x), r)$.  
+
+\problempart{d} If we refer to result of Exercise 2(b) (c.f pg 330) then we see that all constant maps into a path-connected space are homotopic. Our goal is to show that each $f: X \to Y$ is homotopic to a constant map. Let $F: X \times I \to X$ be a nullhomotopy of $X$ and let $x$ be the image of he constant map $F(z,0)$. Then we define $H: X\times I \to Y$ by $(z,r) \mapsto f(F(z,r))$. Then we see that $G$ must be a homotopy between $f$ and the constant map from $X$ to $f(x)$ and the proof is complete. 
+
+\problem{9.52.3} This is a straightforward computation. We apply Theorem 5.51.2 to get
+\[
+[f] * [\alpha] = [f] * [\alpha] * [e_{x_1}] = [f] * [\alpha] * [\bar{\beta}] * [\beta] 
+\]
+Then we apply the group operation to get
+\[
+[f] * [\alpha] * [\bar{\beta}] * [\beta] = [f] * [\alpha * \bar{\beta}] * [\beta]
+\]
+We then note that $\pi_1(X,x_0)$ is abelian so 
+\[
+[f] * [\alpha * \bar{\beta}] * [\beta] = [\alpha * \bar{\beta}] * [f] * [\beta] = [\alpha]*[\bar{\beta}]*[f]*[\beta]
+\]
+Then we compute using Theorem 5.51.2 again after multiplying on the left to get
+\begin{align*}
+[\bar{\alpha}]*[f]*[\alpha] &= [\bar{\alpha}]*[\alpha] * \bar{\beta}] * [f] * [\beta] \\
+[\bar{\alpha}]*[f]*[\alpha]  &= [e_{x_1}] * [\bar{\beta}] * [f] * [\beta] \\
+[\bar{\alpha}]*[f]*[\alpha] &= [\bar{\beta}] * [f] * [\beta] \\
+\hat{\alpha}([f]) = \hat{\beta}([f])
+\end{align*}
+and we are done.
+
+\problem{9.52.6} Again, we compute
+\begin{align*}
+(h_{x_1})\circ \hat{\alpha}([f]) &= (h_{x_1})*([\bar{\alpha}*f*\alpha]) \\
+&= [h \circ (\bar{\alpha} * f * \alpha)] \\
+&= [(h \circ \bar{\alpha})*(h \circ f)*(h\circ\alpha)] \\
+&= [\bar{\beta} * (h\circ f) *\beta] \\ 
+&= \hat{\beta}([h \circ f]) \\
+&= \hat{\beta} \circ (h_{x_0})*([f])
+\end{align*}
+And we are done. 
+
+\problem{9.52.7}
+\problempart{a} 
+
+\problempart{b}
+
+\problempart{c}
+
+\problempart{d}
+
+\end{document}

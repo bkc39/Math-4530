@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,fancyhdr,parskip, graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 0}
+\rhead{\today}
+
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\lra}{\longrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{claim}{Claim}
+\newtheorem*{defn}{Definition}
+
+\begin{document}
+
+\problem{9}
+\problempart{b} We can partition $\Z$ into two distinct pieces based on the position of $x$. Namely,
+\[
+X = \{n \in \Z : n < x\} \text{ and } Y = \{n \in \Z : n > x\}
+\]
+Noting that $X,Y \subset \Z$ means that we can apply the Well-Ordering Principle to that $X$ has a largest element and $Y$ a smallest element. If we set $n$ to be the largest element in $X$ then $n<x<n+1$. Furthermore, this $n$ is unique due to the Well-Ordering Principle. \\
+\problempart{d} For $x,y$ rational and $y < x$ we can write $y = p/q$ and $x = m/n$. So $y < x$ implies that $np < mq$. We then create the new rational 
+\[
+z = \frac{np+mq}{2nq} = \frac{1}{2}(\frac{p}{q} + \frac{m}{n})
+\]
+This shows that $y < z < x$.
+
+\problem{10}
+\problempart{a} Let $x >$ and $0 \leq h < 1$. Then we can see that
+\begin{align*}
+(x+h)^2 &= x^2 + 2hx + h^2 \\
+&\leq x^2 + 2hx + h \\
+&= x^2 + h(2x + 1)
+\end{align*}
+Where the inequality holds because $h^2 < h$ for $h \ in [0,1)$. Similarly,
+\begin{align*}
+(x-h)^2 &= x^2 - 2hx + h^2 \\
+&\geq x^2 - h(2x)
+\end{align*}
+because $h^2 > 0$. \\
+\problempart{b} Now let $x > 0$ and fix $a \in \R$. If $x^2 < a$ then we can choose $h < \frac{a - x^2}{2x+1}$ so that 
+\[
+(x+h)^2 \leq x^2 + h(2x+1) < a
+\]
+Analogously, if $x^2 > a$ then we can choose $h > \frac{a - x^2}{2x}$ so that
+\[
+(x-h)^2 \geq x^2 - h(2x) > a
+\]
+
+\problempart{c} Fix a real number $a$ and suppose that the set 
+\[
+B = \{x \in \R : 0 < x^2 < a\}
+\]
+is unbounded. Then there exists some integer $n$ such that $n < a < n+1$ and for each $m \in Z$ we can find an $x \in B$ such that $m < x < m+1$ because $B$ is unbounded. But then for large enough $m$
+\[
+a < (n+1) <  m^2 < x^2
+\] 
+and then $x \not\in B$. This contradiction implies that $B$ must be bounded. Furthermore, we can see that $B \neq \emptyset$ by considering the two cases $a < 1$ and $a \geq 1$. We see that in the first case $x^2 < a$ means that $x < 1$ and so $x^2 < x$. We then consider some $0 < h < 1$ to see that
+\[
+x^2 < (x+h)^2 < x(1+2h) + h
+\]
+if we choose $h < a$ then $x = \frac{a-h}{1+2h}$ will satisfy $x \in B$ so $B$ is not empty. If $a > 1$ then we can choose $k < 1$ 
+\[
+(1+k)^2 = 1 + 2k + k^2 < 1 + 3k
+\] 
+Then because $a \geq 1$, $a-1 > 0$ and we can take $k < \frac{a-1}{3}$ to see that $(1+k) \in B$. Finally, for $a = 1$ we can choose any $x \in (0,1)$ and $x \in B$. So we are done. \\
+\indent Now let $b = \sup B$. We will see that $b^2 = a$. It is clear that $b^2 \leq a$, so it suffices to prove the reverse inequality. Fix any $\epsilon > 0$ and observe that we can choose a sequence $h_k \to 0$ such that for each $k$
+\[
+b^2 \geq (b - h_k)^2 \geq b^2 - h_k(2b)
+\]
+Then we have that $a - b^2 < \epsilon - h_k(2b)$. Letting $k \to \infty$ gives the desired result.
+
+\problempart{d} Let $b$ and $c$ be positive integers with $b^2 = c^2$. Suppose that $b \neq c$ and without loss of generality that $b < c$. Then by assumption
+\[
+\frac{b}{c} = \frac{c}{b}
+\]
+but the left side is less than 1 and the right side is greater than 1 which is impossible. Therefore $b = c$. \\
+
+\problem{11} 
+\problempart{a} Suppose that $m$ is an odd integer. Then we know that $m/2 \not\in \Z$ and so we can pick $n$ such that $n < m/2 < n+1$. We multiply this inequality by 2 to see that $2n < m < 2n + 2$. Using the fact that $m\in \Z$ we can see that $m = 2n+1$. 
+
+\problempart{b} Suppose that $p$ and $q$ are add integers. Then we can write $p = 2n + 1$ and $q = 2m+1$. So 
+\[
+pq = (2n+1)(2m+1) = 4mn + 2(m+n) + 1 = 2k + 1
+\]
+where $k = mn + m + n$. Hence, $pq$ is also odd. Further, we can see $p^n$ is odd by induction on $n$.
+
+\problempart{c} Suppose that $a > 0$ is rational. Consider the set 
+\[
+N = \{x \in \Z^+ : ax \in \Z^+\}
+\]
+Then we set $n = \min_{x \in N} x$. We see that $an = m$ for some integer $m$. If $n, m$ are both even, then they must share a factor of 2 so $a = \frac{m'}{n'}$, where $n' = n/2$ and $m' = m/2$. This contradicts the minimality of $n$ and therefore $n,m$ cannot both be even.
+  
+\problempart{d} 
+\begin{thm}
+The $\sqrt{2}$ is irrational.
+\end{thm}
+\begin{proof}
+Suppose that $\sqrt{2}$ were rational. Then we would have $\sqrt{2} = m/n$ with $n,m$ not both even. If we square both sides we see that $2n^2 = m^2$. Hence, we have that $m^2$ is even by part {\bf (b)}. However, then $m = 2k$ and $m^2 = 4k^2$. We divide by 2 to see that $n^2 = 2k^2$ which means that $n$ must also be even. But this contradicts the fact that $n,m$ are not both even. Hence, $a$ cannot be written as $m/n$ and is therefore irrational. 
+\end{proof}
+
+\problem{4}
+\problempart{d} Consider the map
+\begin{align*}
+f: X^n \times X^\omega &\lra X^\omega \\
+((x_1, \ldots, x_n),(y_1,y_2,\ldots)) &\mapsto (x_1,\ldots, x_n,y_1,y_2,\ldots)  
+\end{align*}
+We need to show that $f$ is bijective. The fact that $f$ is injective is obvious from the definition. To see that $f$ is also surjective take any element $z = (z_1, z_2,\ldots) \in X^\omega$. Then we can see that $f^{-1}(z) = ((z_1,\ldots, z_n), (z_{n+1},\ldots))$. And furthermore, this inverse is unique because if any other element $k$ had $f(k) = z$ then $k_i = f^{-1}(z)_i$ for all $i$.  
+
+\problem{5}
+\problempart{a} Yes. Write ${\bf x} \in \Z^\omega$.\\
+\problempart{b} Yes. Take $A_i = \{x \in \R : x \geq i\}$ and then write ${\bf x} \in \prod_{i=1}^\infty A_i$.\\
+\problempart{c} Yes. Take 
+\[
+A_i = 
+\begin{cases}
+\R & if i < 100 \\
+\Z & otherwise
+\end{cases}
+\]
+Then write ${\bf x} \in \prod_{i=1}^\infty A_i$. \\
+\problempart{d} No. However, this set is isomorphic to a Cartesian product of subsets of $\R$ via a canonical projection.
+\end{document}
+
+
+
+

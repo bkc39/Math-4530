@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 5}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+\DeclareMathOperator{\mtilde}{{\raise.17ex\hbox{$\scriptstyle\sim$}}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{claim}{Claim}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prop}{Proposition}
+
+\begin{document}
+\problem{3.25.2}
+\problempart{b} First we observe that the function $f(x) = x - x_0$ is a homeomorphism because it preserves the metric. As a result, we have that $x,y$ are in the same path component if and only if $x-y$ and $0$ are in the same component, which means the sequence $z = x-y$ is bounded. Consequently, we can assume without loss of generality that $y = 0$. In the forward direction, we assume that $0,x$ are in the same path component, which guarantees the existence of a continuous path
+\[
+\alpha:[0,1] \lra \R^\omega
+\]
+Such that $\alpha(0) = 0$ and $\alpha(1) = 1$. Furthermore, the image $\alpha([0,1])$ is connected, meaning that $\alpha(1) = x$ is bounded because $\alpha$ is continuous and the subspace of bounded sequences is connected. \\
+In the reverse direction, we suppose that $x$ is bounded. We need to find a path $\alpha$ that begins at 0 and ends at $x$. the most natural choice for this path is $\alpha(t) = tx$. It is clear that $\alpha$ is bijective, so we need to show that this map is continuous. Using the boundedness of $x$ we can find some $k$ such that $x_n \leq k$ for all $n$. With this $n$ in mind we apply the definition of the uniform metric to observe that 
+\[
+\overline{\rho}(\alpha(u), \alpha(v)) = \sup_n\{\min(|u-v|x_n, 1)\} = |u - v|n
+\]
+whenever $u,v \in [0,1]$. Now fix an $\epsilon > 0$ and not that if we take $\delta < \min(M,\epsilon/M)$ then 
+\[
+\overline{\rho}(\alpha(u), \alpha(v)) < \epsilon
+\]
+for $|u - v| < \delta $. This completes the proof. 
+
+\problem{3.25.3} The ordered square $S$ is the product of $[0,1] \times [0,1]$ where both have the order topology. Hence, open neighborhoods of any point $x$ are of the form $(x - \delta, x + \delta) \times (x - \epsilon, x+ \epsilon)$. Each factor in the Cartesian product is connected, and hence any open neighborhood about a point is connected. This shows that $S$ is locally connected. \\
+	To see that $S$ is not locally path connected, we suppose towards a contradiction that it is. This means that there is some path $\alpha: [0,1] \to S$ wholly contained in $S$ such that $\alpha(0) = u$ and $\alpha(1) = v$. Following the outline of Example 24.6 we note that the image of $\alpha([0,1])$ must contain each point of $S$ by the intermediate value theorem. So we see that for every $x \in [0,1]$ we have 
+\[
+U_x = \alpha^{-1}(x \times (0,1))
+\]
+is non-empty and open. For this $x$, we choose a rational $u_x \in U_x$ and note that because the sets $U_x$ are disjoint, the map $x \to u_x$ is injective. But this is impossible because $U_x$ is an interval and hence uncountable. Note that this relies on the fact that for the particular choice of $u = (x,0)$ we have that any open set containing $u$ contains a point $(x - \epsilon, 0)$ for some $\epsilon > 0$. Hence, $S$ is not locally path connected. \\
+In light of the above we can see that the path components of $S$ are the vertical lines in $S$. The intuition that led us to this consequence was that the reason that we are not locally connected at $(x,0)$ is because there is no smooth way to move right, continuously because that would require a discontinuity at $x = 1$. More formally, each of these vertical segments is of the form
+\[
+V = \{[(x,0), (x,1)] \suchthat x \in S\}
+\]
+Each of these is homeomorphic to the unit interval in the order topology, and so they are path connected. And furthermore, there are no continuous paths $[(x,0),(x,1)] \to [(y,0),(y,1)]$ for $y\neq x$ for the reasons outlined in the proof that $S$ was not locally path-connected. 
+
+\problem{3.25.4} Let $X$ be a locally path-connected topological space and let $\mathcal{O} \subset X$ be open and connected.  We use Theorem 25.4 to get that each path component of $\mathcal{O}$ is open in $X$. We then observe that $\mathcal{O}$ is connected and therefore must have only one path component. Therefore, $\mathcal{O}$ is path connected because the one path component is all of $\mathcal{O}$.
+
+\problem{3.25.5}
+\problempart{a} We take the space $T$ as described in the problem to be the set of all lines connecting $p = (0,1)$ to rational points of the form $(q,0)$ with $q \in \Q \cap [0,1]$. It is clear that $T$ is path connected because given two point $u,v \in T$ we can construct a path $\alpha$ that starts at $u$, follows the line to $p$, and then traverses the line to $v$. All of the points on these lines are contained in $T$ by definition and so $\alpha$ is a valid path. More rigorously take
+\[
+\alpha(t) = \begin{cases}
+(1-2t)u + 2tp & t \leq 1/2 \\
+2tp - (1-2t)v  & t > 1/2
+\end{cases}
+\]
+Which is continuous and traverses the two lines as stated above. It is clear that $T$ is locally path connected at $p$ and so every open set containing $p$ is path connected and hence, connected. This immediately gives that $T$ is locally connected at $p$. At any other point, an open neighborhood consists of disjoint line segments which are a disjoint union of path connected components, which means that the neighborhood is not connected. 
+
+\problempart{b} We extend the example in the previous part to construct a space that is path connected but not locally connected anywhere. The intuition is to force there to be a dense set of lines in a neighborhood of $p$, and preserve the structure of the rest of $T$. To do this, we simply do the same construction but push the lines up near $p$. Formally, Take the new space $T_p$ to be the set of all lines connecting $(0,0)$ to rational points of the form $(-q,1)$ where $q \in [0,1]$. Geometrically we reflected $T$ across the $y$ axis and then flipped it upside down. We take our example space $T' = T \cup T_p$. Path connected follows from above because we take $u,v$ and note that the only non-trivial case (as in different from the previous part) is when $u \in T$ and $v \in T_p$. In this case just traverse from $u$ to $p$, then $p$ to $(0,0)$, then $0,0$ to our destination point, $v$. So $T'$ is path connected. For local connectedness note that the only points to check are $(0,0)$ and $p$, all others follow from the preceding part. We will check $p$, and $(0,0)$ will follow by symmetry. Now any neighborhood of $p$ will contain a dense set of disjoint line segments (on the ``left'') and because they are disjoint this neighborhood cannot be connected. So $T'$ is not locally connected at $p$. This completes the proof.  
+
+\problem{3.25.9} Following the hint we observe that if $x \in G$ then $xC$ is the component of $G$ containing $x$. Furthermore, we have that the cosets of $C$ are given by the homeomorphisms $f_\alpha(x) = \alpha \cdot x$ and $g_\alpha(x) = x\cdot \alpha$. Then we see that $C$ is the component of $e$ then we have that $xC$ and $Cx$ are also components of $G$ containing $e$. This means that $C = xC = Cx$ or equivalently that $C$ is normal in $G$. 
+
+\problem{3.25.10}
+\problempart{b} First we need to show that each component of $X$ is contained in a quasicomponent of X. Pick a component $Y$ in $X$ and observe that $x,y \in Y$ we must have that $x \mtilde y$ because otherwise there would be a separation $A \cup B$ of $Y$ with $x\in A$ and $y\in B$, but this contradicts the fact that $Y$ is a connected component of $X$. Hence, $Y$ is in contained in some equivalence class of the relation $\mtilde$. \\
+If we have in addition that $X$ is a locally connected space then we let $C$ be a quasicomponent of $X$ and $Y$ some component of $C$. We then take $U$ to be the remaining components of $Y$, not including $C$. We have that $X$ is locally connected and $U,C$ are open in $X$ and so we can appeal to Theorem 25.3 to see that they are also open in $Y$. Then we use the same trick as before, if $U$ was non-empty, then we would have a separation on $Y = C \cup U$, which is impossible, and so $C$ is contained in $Y$. This completes the proof. 
+
+\problem{3.26.4} Let $X$ be a metric space and $C$ a compact subspace. It is clear that $C$ is closed in $X$ because $X$ is metric and therefore hausdorff, and we apply Theorem 26.3 to get that $C$ must be closed. Now we need to show that $C$ is bounded in the metric of $X$. Suppose not, then would see that for any ball $B_r(x)$ there would be some $y$ such that $y\not\in B_r(x)$. We then restrict our attention to those balls that have $x \in C$ and note that 
+\[
+C \subset \bigcup_{x\in C}\bigcup_{r > 0} B_r(x)
+\]
+But if we try to extract a finite subcover, we can see that we will have a point $y$ such that $y$ is not contained in any finite union of balls, this is because there are finitely many balls and infinitely many points outside of them such as $y \in C$ with $d(y,x) > r$, which is infinite because $C$ is unbounded. But then $C$ is not compact. This contradiction means that $C$ must have been bounded. \\
+For a metric space where not every closed and bounded subspace is compact take any infinite space with the discrete metric. This is clear because a discrete space is compact if and only if it is finite (the cover of the infinite space by $x_1,x_2,...$ has no finite subcover). 
+\end{document}

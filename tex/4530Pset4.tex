@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 4}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\F}{\mathbb{F}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\GL}{\text{GL}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+\DeclareMathOperator{\normal}{\mathrel{\unlhd}}
+\DeclareMathOperator{\mtilde}{{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{claim}{Claim}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prop}{Proposition}
+
+\begin{document}
+
+\noindent{\textbf{Supplementary Exercise 1}\\}
+If we assume that $H$ is a topological group, then we have that the function $i: (x,y) \mapsto (x,y^{-1})$ is continuous because $y \mapsto y^{-1}$ by assumption. Then we note that if $c: (x,y) \mapsto x\cdot y^{-1}$ then $c = \cdot \circ i$, which is the composition of continuous functions and therefore continuous. In the other direction we have that the map $c$ defined above is continuous, and so it must be continuous in both variables (Theorem 18.4). As a result of this the map $i': y \mapsto y^{-1}$ can be written as $c(1,y) = 1 \cdot y^{-1} = y^{-1}$. Then we can see that the map $\cdot$ must also be continuous because $c(x, c(1,y)) = x \cdot (y^{-1})^{-1} = x \cdot y$. 
+
+\noindent{\textbf{Supplementary Exercise 2}\\}
+\problempart{e} It is clear to see that $\GL(n)$ is $T_1$ because of the canonical embedding into euclidean space, which is $T_1$ (In fact, it is Hausdorff). To show that matrix multiplication is continuous we will show that each of the coordinate maps are continuous. We know that each coordinate space $\R$, is a topological group with respect to both operations (a topological field?), and so if we observe that each coordinate $a_{ij}$ of the matrix $A = BC \in \GL(n)$ can be written as 
+\[
+a_{ij} = \sum_{i = 1}^{n}\sum_{j = 1}^n b_{ik}c_{kj}
+\]
+Then each of the coordinate functions is a composition of addition and multiplication and hence continuous. That inversion is continuous is a cheap consequence of this fact because the inversion (in the usual Gauss-Jordan sense) can be vied as a composition of multiplication of elementary matrices (which correspond the the row operations in the reduction process). We already saw that matrix multiplication is a continuous operation, and so the composition of these functions is also continuous. 
+
+\noindent{\textbf{Supplementary Exercise 4}\\}
+We need to first show that these functions are bijective. First consider 
+\[
+f_\alpha: x \mapsto \alpha \cdot x
+\]
+To see that this function is injective suppose that $f_\alpha(x) = f_\alpha(y)$, then $\alpha\cdot x = \alpha \cdot y$ and multiplication on the left by $\alpha^{-1}$ gives that $x=y$, so $f$ in injective. To see that it is surjective observe that for $y \in G$, $f_\alpha(\alpha^{-1}y) = y$. The group operation is continuous and so we have that $f_\alpha$ is a homeomorphism. The proof for $g_\alpha$ is analogous with multiplication on the right. To see that the space is homogeneous observe that for any $x,y \in G$, 
+\[
+f_{y\cdot x^{-1}}(x) = (y\cdot x^{-1}) \cdot x = y \cdot (x^{-1} \cdot x) = y 
+\]
+So $G$ is a homogeneous space. 
+
+\noindent{\textbf{Supplementary Exercise 5}\\}
+\problempart{a} We saw earlier that $f_\alpha$ was a homeomorphism. If we let $\pi$ be the canonical map $G \onto G/H$ then the map $\pi \circ f_\alpha$ is a homeomorphism in the quotient space. This is clear because $\pi$ preserves cosets in $G$. As a result we see that $G/H$ is also a homogeneous space because we see that for any two cosets $xH$ and $yH$ we have that $f_{yx^{-1}}(xH) = yH$.
+
+\problempart{b} This is clear because we know that $H$ is closed and $f_\alpha$ is a homeomorphism so the one point set $xH = (\pi \circ f_x) (H)$ is closed in $G$. 
+
+\problempart{c} We take any open set $\mathcal{O} \subset G$ and observe that $p(\mathcal{O})\mathcal{O}H = \bigcup_{h \in H} \mathcal{O}h$. We can express this differently as
+\[
+\mathcal{O}H = \bigcup_{h\in H} g_h(U)
+\]
+But each of the $g_h$ is a homeomorphism so these sets are open. Then $p(\mathcal{O})$ is open in $G/H$ and $p$ is an open map. 
+
+\problempart{d} That $G/H$ is $T_1$ was shown in part $(b)$. Using Exercise 1 we observe that the map $m: (x,y) \to x\cdot y^{-1}$ is continuous when restricted to $H$. Because $H \normal G$ we know that the left and right cosets of $H$ are equal or that $f_\alpha(H) = g_\alpha(H)$. So we have that $m_H \circ (p \times p) = p \circ m(x,y)$. We know that both $f$ and $p$ are continuous and because $p$ is a quotient map that $p \times p$ is also a quotient map. Hence, $p\circ f(x,y)$ induces the continuous function $m_H(xH,yH) = m(x,y)H$. 
+
+\problem{3.23.3} We are given a collection $\{A_\alpha\}$ of connected subspaces of $X$ and another connected subspace $A \subset X$ such that for any $\alpha$ we have $A \cap A_\alpha \neq \emptyset$. We want to show that 
+\[
+B = A \cup \left(\bigcup_\alpha A_\alpha\right)
+\]
+is connected as well. Suppose not, then we can write $B = X \cup Y$. We must have that either $A \subset X$ or $A \subset Y$, so without loss of generality suppose that it is in $X$. Then $A \cap Y \neq 0$ because $A \cap A_{\alpha'}$ for each $A_{\alpha'} \subset Y$. This is a contradiction. Hence, we must have had that $B$ is connected. 
+
+\problem{3.23.6} Take $A \subset X$ and let $C$ be a connected subspace of $X$ such that $C \cap A \neq \emptyset$ and $C \cap (X - A) \neq \emptyset$. We need to show that $C \cap \partial A \neq \emptyset$. Again, suppose it were not the case. Then we could separate $C$ into the parts that intersect both $A$ and its complement. More formally, define
+\[
+X = C \cap \text{Int}(A) = C \cap \overline{A} - \partial A
+\]
+and
+\[
+Y = C \cap \text{Int}(X-A) = C \cap \overline{X - A} - \partial A
+\]
+Then $X \cap Y = \emptyset$ and $C = X \cup Y$. But then $C$ is separable. This contradiction gives the result. 
+
+\problem{3.23.12} Let $X$ be a connected topological space and $Y \subset X$ a connected subspace. Suppose that $A$ and $B$ are a separation of the complement $X-Y$. We will show that $Y\cup A$ is connected (The proof for $Y\cup B$ is the same modulo a change of variable). As usual, we suppose towards a contradiction that $Y \cup A$ is not connected. Then we can find a separation $Y \cup A = V \cup W$  and observe that for such a separation we have that $X = (B \cup V) \cup W$ is a partition of $X$. Because $Y$ is connected we can apply Lemma 23.2 to assume without loss of generality that $Y \subset V$. We then apply Lemma 23.1 to see that the following all must hold
+\[
+\overline{A} \cap B = \emptyset, \text{ } \overline{B} \cap A = \emptyset, \text{ }\overline{V} \cap W = \emptyset, \text{ }\overline{W} \cap V = \emptyset
+\]
+But then we have that $(B \cup V) \cup W$ is not just a partition but actually a separation of $X$, which is a contradiction. Hence, $Y\cup A$ is connected. 
+
+\noindent{\textbf{Additional Problem A}\\}
+At face value the fact that these things are homeomorphic is not obvious because each of the tori in the construction has a hole in it, so the main goal in this construction is to use the relation $\mtilde$ to ``remove'' this hole. Following the convention of the problem we will embed $S^3$ into $\C^2$ by taking the usual representation 
+\[
+S^3 = \{(z,w) \in \C^2 \suchthat |z|^2 + |w|^2 = 2\}
+\]
+The next step was the hardest one which is where we actually ``find'' the torus. The geometric intuition for this is that if $z$ and $w$ were real then we would have something that looks like a circle, and because $|z|^2 = 1$ and $|w|^2 = 1$ both define circles, this looks like the product $S^1 \times S^1$, and the $(z,w)$ that make up this product should be removed in the construction. To formalize this we consider two sets 
+\[
+A = \{(z,w) \in \C^2 \suchthat |z| \leq 1 \leq |w|\}
+\]  
+and
+\[
+B = \{(z,w) \in \C^2 \suchthat |w| \leq 1 \leq |z|\}
+\]  
+If we think of each of these sets as lying in ``different'' copies of $\C$, they define a disk inside a circle of radius 2. This makes the geometry clear, the intersection of these two sets is their common boundary
+\[
+\partial A \cap \partial B = \{(z,w) \in \C^2 \suchthat |z| = |w| = 1\}
+\]
+which is clearly homeomorphic to the torus $S^1 \times S^1$ via the identity map. Now we need to show that each of these parts is homeomorphic to the torus in its own right. This is where the elements $\{0,1\}$ come into play. The geometry of the problem led us to consider each copy of $\C$ in $\C^2$ separately. Hence, we can enforce this separation by saying that the vector $(z,w,1)$ has $z \in A$ and $w \in \C - D^2$ and that $(z,w,0)$ has $z \in \C - D^2$ and $w \in B$. Then we define the map 
+\begin{align*}
+f: A &\lra S^1 \times D^2 \times \{0\}\\
+(z,w) &\mapsto (z, w/|w|, 0)
+\end{align*}
+and 
+\begin{align*}
+g: B &\lra D^2 \times S^1 \times \{1\} \\
+(z,w)  &\mapsto (z/|z|, w, 1)
+\end{align*}
+Each of the coordinate functions are clearly continuous and invertible. Hence, we have that when we take $(A \cup B)/\mtilde$, we collapse the torus to a point and find that 
+\[
+S^3 \approx A \cup B
+\]
+which is what we needed to show. 
+
+\noindent{\textbf{Additional Problem B}\\} This problem is actually even more shocking than the previous one. We let the circle act on the 3-sphere via complex multiplication componentwise. Geometrically, this amounts to rotating circles in the complex plane. The problem that we run into is that given a $(z,w) = (e^{i\theta}, e^{i\tau})$ determine two angles, which we would like to use for the usual polar parameterization of $S^2$, but it is hard to turn the orbits of these two circles in $\C \times \C$ to one circle on the sphere. We use the trick that we used in the last problem which is to mod out by the appropriate relation to get the geometry to correspond to our intuition.\\
+\indent More precisely we are considering the action of $S^1 = \{\lambda \in \C | |\lambda| = 1\}$ on $S^3 = \{(z,w) \suchthat |z|^2 + |w|^2 = 1$ via $\lambda \cdot (z,w) = (\lambda z, \lambda w)$. We observe that this defines a line in $\C^2$. We want to look at the collection of all lines parallel to $(z,w)$ by inducing the usual equivalence relation of a vector space modulo a 1 dimensional subspace that is 
+\[
+(z,w) \mtilde (x,y) \longleftrightarrow \exists \lambda \text{ such that }\lambda(z,w) = (x,y)
+\]
+So the orbit of a point in $S^3$ under this action corresponds to the coset of the line spanned by $(z,w)$ modulo this relation. That is, there is a homeomorphism $X \approx \C^2 - \{0\}/\mtilde$ given canonically as $\lambda \cdot S^3 \mapsto (z,w)$. Each of these lines in $\C^2 - \{0\}$. Contains a circle of unit length by construction, and so if we restrict our quotient map to these circles we have a homeomorphism by one of the previous exercises (composition of homeomorphism and quotient map). 
+
+\end{document}

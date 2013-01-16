@@ -1,0 +1,172 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 2}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\interior}{\text{Int}}
+\DeclareMathOperator{\bd}{\text{Bd}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+\DeclareMathOperator{\hookta}{\lhook\joinrel\xrightarrow{\ \ \ \ }}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{claim}{Claim}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prop}{Proposition}
+
+\begin{document}
+
+\problem{17.6}
+\problempart{a} Suppose that $A \subset B$. Then we must have that any closed set $C$ containing $B$ must also contain $A$ because $A \subset B \subset C$. Hence, $A \subset \overline{B}$. So $\overline{B}$ is a closed set containing $A$ and so by definition $\overline{A} \subseteq \overline{B}$ because $\overline{A}$ is the smallest closed set containing $A$. \\
+
+\problempart{b}  The set $\overline{A \cup B}$ is the smallest closed set containing both $A$ and $B$. With this in mind we see that $\overline{A \cup B} \subseteq \overline{A} \cup \overline{B}$ because $A \subset \overline{A} \cup \overline{B}$ and $B \subset \overline{A} \cup \overline{B}$ and $\overline{A} \cup \overline{B}$ is closed because it is the union of closed sets. to see the reverse containment, choose any $x \in \overline{A} \cup \overline{B}$. Theorem 17.5 for any open set $U$ containing $x$ we have that either $ U \cap (A) \neq \emptyset$ or $U \cap B \neq \emptyset$ because $x \in A$ or $x \in B$. So
+\[
+(U \cap A) \cup (U\cap B) = U \cap (A \cup B) \neq \emptyset
+\]
+But $U \cap (A \cup B) \neq \emptyset$ implies that $x \in \overline{A \cup B}$. This proves the reverse equality and we are done. \\
+
+\problempart{c} We can follow the outline of the last proof to see that for any $x \in \bigcup_\alpha A_\alpha$ and any open set $U$ which contains $x$ that there is some $\alpha$ such that $U \cap A_\alpha \neq \emptyset$. So this means that 
+\[
+\bigcup_\alpha (U \cap A_\alpha) = U \cap \bigcup_\alpha A_\alpha \neq \emptyset  
+\]
+Note that $ U \cap \left(\bigcup_\alpha A_\alpha\right) \neq \emptyset$ implies that $x \in \overline{\bigcup_\alpha A_\alpha}$. To see why the other inclusion fails in this case, note that in {\bf (b)} we had a finite union. So you can take $A_n = \{1/n\}$ and set $A = \bigcup_{n=1}^\infty A_n$ then we have that 
+\[
+A = \bigcup_{n=1}^\infty \overline{A}_n \subset \bigcup_{n=1}^\infty \overline{A}_n \cup \{0\} = \overline{A}
+\]
+
+\problem{17.14} Let $x_n = 1/n$ be a sequence lying in $\R$ with the finite complement topology. If we take any $x \in \R$ and any open set $U$ containing $x$, we can see that this means that $|U^c| < \infty$. that means that there are only finitely many points in $\R$ that are not contained in $U$. since each $x_n \in \R$ this means that only finitely many of the points of the sequence are not contained in $U$. This means that $x_n \to x$ for each $x \in \R$.  
+
+\problem{17.16} 
+\problempart{a} We want to find the closure of the set $K = \{1/n \suchthat n \in \Z_+\}$. We have
+\begin{enumerate}
+\item In the standard topology it is well known that the closure of this set is $\overline{K} = K \cup \{0\}$. To see this take any convergent sequence in $K$, and it will be a subsequence of $x_n = 1/n$. So we only need to find the limit of $x_n$ as $n\to \infty$. We can see that $0$ works because for any $\epsilon > 0$ there is an $n$ such that $1/n < \epsilon$ and $x_n \to 0$. This gives that $\{0\}$ is the set of limit points of $K$. 
+\item In the topology $\R_K$ the sequence the closure $\overline{K} = \emptyset$. We can see this because if we take any open set in $\R_K$, then it can be written as a union of sets of the form $(a,b) - K$, but then no open set contains any points of $K$. Hence, there are no sequences in $K$ that converge and so the closure of $K$ is empty. 
+\item We showed above that in the finite complement topology the set $\overline{K} = \R$ because if we take any open set in $\R$ with this topology we must have that only finitely many of the points are not in the open set. Hence, any point in $\R$ is a limit point of a sequence in $K$. 
+\item In the upper limit topology we have that a sequence converges if it ``approaches from the left''. More precisely if we have $x_n \in K$ then for any $\epsilon > 0$ there is an $N$ such that $n > N$ implies that
+$L-\epsilon < x_n \leq L$ then $x_n \to L$. Then the set of limit points for the sequence $x_n = 1/n$ is empty because $x_n$ does not approach 0 from the left. 
+\item We now endow $\R$ with the topology generated by the basis 
+\[
+\mathcal{B} = \{(-\infty, a) \suchthat a \in \R\} 
+\]
+Here we will see that the set of limit points is $\R_+$. To see this, choose any $x > 0$. Observe that $x \in (-\infty, y)$ for each $y \geq x$. If $x \geq 0$ then we can choose any $\epsilon > 0$ and eventually $1/n < \epsilon$ and so there can only be finitely many terms in $K$ that are not in $(-\infty, y)$ for $y > x$.  
+\end{enumerate}
+
+\problempart{b} Now we will see which of the sets is Hausdorff.
+\begin{enumerate}
+\item $\R$ with the standard topology is a Hausdorff space. To see this choose any distinct $x,y \in \R$. We can then set $\ell = d(x,y) / 2$. If $x \neq y$ then this quantity will be positive. We then choose the open ball centered at $x$ and $y$ respectively of radius $\ell$ and note that these are two disjoint neighborhoods. Then choose any neighborhood of $x$ with diameter $r$. Then there is a neighborhood of $x$ with diameter $r/2$. Finally, take $y \in U$, an open neighborhood of $x$. Then if $U$ has diameter $r$ and $d(x,y) = \ell$ then we can see that the open ball of radius $(r - \ell)/2 $ will lie in $U$ and contains $y$. So $\R$ is Hausdorff.
+\item The topological space $R_K$is also Hausdorff. This follows from the fact that the $K-$topology is strictly finer than the standard topology. Thus, the open sets mentioned above will also work in $\R_k$ because they are still open and disjoint.
+\item The finite complement topology is not Hausdorff. To see this choose to points $x,y \in \R$. Then any neighborhood of these points say $U_x$ and $U_y$, respectively, must contain all but finitely many points. However, $U_x\cap U_y \neq \emptyset$ because they could only possibly differ in a finite number of points, and they are both infinite, meaning that they share at least one point. 
+\item We will proceed as above, first showing that the upper limit topology is strictly finer than the standard topology, and hence $\R_u$ is Hausdorff. Let $\mathcal{T}$ be the standard topology on $\R$ and $\mathcal{T}'$ the upper limit topology. Given a basis element $(a,b) \in \mathcal{T}$ and a point $x \in (a,b)$ the basis element $(x,b] \in \mathcal{T}'$ is contained in $(a,b)$. However, given an element $[x, b)$ in $\mathcal{T}'$ there is no open interval containing $x$ that lies in $[x,b)$. Hence $\mathcal{T}'$ is strictly finer than $\mathcal{T}$.   
+\item The topology generated by the basis 
+\[
+\mathcal{B} = \{(-\infty, a) \suchthat a \in \R\} 
+\]
+is Hausdorff. We can verify this fact by choosing two points $x,y \in \R$ with this topology and without loss of generality suppose that $x < y$. Then any open set containing $x$ must also contain an element $(-\infty, a)$ with $x < a$. But then $x < (x+y)/2 < y$ and if we set $a = (x+y)/2$ then $x \in (-\infty, a)$ but $y \not\in (-\infty, a)$ and the two sets are disjoint. Hence, $\R$ is not Hausdorff in this topology.
+\end{enumerate}
+Now we will see which of these spaces satisfy the $T_1$ axiom.
+\begin{enumerate}
+\item In the standard topology we have that $\R$ is $T_1$. This follows from the third axiom of being a Hausdorff space.
+\item Similarly, $\R_K$ is Hausdorff and, consequently, $T_1$.
+\item In this case we have that $\R$ is not Hausdorff, but is $T_1$. To do this, take the open set $X\setminus\{y\}$, an open set containing $x$ but not $y$, and $X\setminus\{x\}$, an open set containing $y$ but not $x$. This verifies that $\R$ is $T_1$ in the finite complement topology. 
+\item Again, $\R$ is a Hausdorff space in the upper limit topology and hence it must also be $T_1$.
+\item In this case we have that $\R$ is $T_1$ because it is Hausdorff. 
+\end{enumerate}
+
+\problem{17.19}
+\problempart{a} First we will see that $\interior A \cap \bd A = \emptyset$. Suppose that $x \in \bd A$. Then we must have that $x \in \overline{A}$ and $x \in \overline{(X - A)}$. This means that any neighborhood $U$ of $x$ intersects both $A$ and $X-A$. However, for any $y \in \interior A$ there is an open neighborhood of $y$ that is wholly contained in $A$, and therefore cannot intersect $X-A$. Thus, we have that $\interior A \cap \bd A = \emptyset$. Now we will show that $\overline{A} = \interior A \cup \bd A$. First observe that $\interior A \subset \overline{A}$ because $\interior A \subset A \subset \overline{A}$. Furthermore, $\bd A \subset \overline{A}$ by the definition, and so $\interior A \cup \bd A \subseteq \overline{A}$. In the reverse direction take any $x \in \overline{A}$. If $x \in \interior A$ then we are done. If not, then we must have that $x \in \bd A$ because $x \not\in \interior A$ means that there is no open set in $A$ which contains $x$. Then $x \in \overline{(X-\interior A)} \supset \overline{(X-A)}$. this means that $x \in \bd A$ and we are done.  \\
+\problempart{b} Now we need to show that $\bd A = \emptyset$ if and only if $A$ is both open and closed.   We proceed as follows, $\bd A = \emptyset$ means by definition that $\overline{A} \cap \overline{(X-A)} = \emptyset$. Hence, the set of $x$ that satisfy such a constraint are those for which $x \in U$ open in $X$ such that $U\cap A = \emptyset$ and $U\cap X-A = \emptyset$ meaning that $U$ is an open neighborhood of $x$ fully contained in both $A$ and $X-A$. This implies that $A, X-A \in \mathcal{T}$. That is, $A$ is both closed and open. 
+\problempart{c} Recall that if $U$ is open then $U = \interior U$. Furthermore, by part {\bf (a)} we have that $\overline{U} = \interior U \cup \bd U$. But then 
+\[
+\overline{U} = U \cup \bd U
+\]
+The union is disjoint and so $\overline{U} - U = \bd U$ as desired. \\
+\problempart{d} This is not true. Consider $U = \R - \{x\}$ for any $x \in \R$. Then we have that $U$ is open and $ U \subset \interior\overline{(\R - \{x\})} = \R$. This containment is clearly strict so $U \subset \interior \overline{U}$. 
+
+\problem{18.2} Suppose that we have the constant function defined by $x \mapsto y$ for some given $y$ and every $x$. Then $y = f(x)$ for each $x$, but $y$ is not a limit point of $f(A)$ because it contains no points besides itself. Therefore, every neighborhood of $y$ contains just one point of $f(A)$, and as a result is not a limit point.   
+
+\problem{18.7} 
+\problempart{a} Let $U \subset \R$ be open and choose any $x \in f^{-1}(V)$. Then we can find some $y \in U$ such that $y = f(x)$. $U$ is open and so we can find some $\epsilon > 0$ such that $B_{\epsilon}(y) \subseteq U$. And then by the continuity of $f$ we can therefore find a $\delta > 0$ such that $f([x, x+\delta)) \subseteq B_\epsilon(y) \subset U$. But for sufficiently small $\delta$, $[x,x+\delta) \subset f^{-1}(U)$ and is basis element for the topology of $\R_\ell$ and so $f^{-1}(U)$ is open in $\R_\ell$. Hence, $f$ is continuous. 
+
+\problem{18.8}
+\problempart{a} Suppose that $f,g: X \to Y$ are continuous and let $U \{x \suchthat f(x) \leq g(x)\}$. To show that $U$ is closed we will show that its complement $X-U$ is open. By definition $X-U = \{x \suchthat f(x > g(x))\}$. Then we can write, 
+\[
+X - U = \bigcup_{y\in Y}\{f(x) > y > g(x)\}
+\]
+Then if $y' > y$ and $(y,y') = \emptyset$ then 
+\[
+\bigcup_{y,y'} \{f(x)>y \text{ and } g(x) < y'\}
+\] 
+which is open in $X$. Hence, $X-U$ is open and as a result $U$ is closed. \\
+\problempart{b} We define $h: X \to Y$ via 
+\[
+h(x) = \min\{f(x), g(x)\}
+\]
+We can decompose $X$ into two pieces, $U = \{x \suchthat f(x) \leq g(x)\}$ and $\overline{X-U} = \{x \suchthat f(x) \geq g(x)\}$. These two sets intersect on $\{x \suchthat f(x) = g(x)\}$. Furthermore, $f,g$ are continuous when restricted to either $U$ or $X-U$ by definition. Hence, we can apply the pasting lemma to see that $h$ is continuous. \\
+\problem{18.9}
+\problempart{a} We are given a finite collection $A_\alpha$ such that $A_\alpha$ is closed for each $\alpha$ and $X = \bigcup_\alpha A_\alpha$. Choose any closed $V \subset Y$ and note that 
+\[
+f^{-1}(V) = f^{-1}(f(X) \cap V)
+\]
+But because $X = \bigcup_\alpha A_\alpha$, 
+\[
+f(X) = f\left(\bigcup_\alpha A_\alpha) = \bigcup_\alpha f(A_\alpha)\right)                      
+\]
+So
+\[
+f^{-1}(V) = f^{-1}\left(\bigcup_{\alpha}f(A_\alpha) \cap V\right) = \bigcup_\alpha f^{-1}\left(f(A_\alpha) \cap V\right)
+\]
+Each of the terms $f(A_\alpha) \cap V = f|_{A_\alpha}(V)$ is a finite intersection of closed sets and hence, is closed. We then use the fact that $f$ is continuous to see that their inverse image under $f$ is also closed. This means that the last union is a finite union of closed sets, and therefore closed. This means that $f$ is continuous. \\
+\problempart{b} First we let our collection of closed sets $\{A_n\} = \{[1/(n+1), 1/n] \suchthat n \in \Z_+\}$. In this case $\{A_n\}$ is not finite. Next, define the function $f: \R \to \R$ by
+\[
+f(x) = 
+\begin{cases}
+0 & x\in A_n \\
+1 & x\in  (-\infty, 0)
+\end{cases}
+\]
+Then $f$ is continuous on $A_n$ for each $n$ and it is also continuous on $(-\infty, 0)$, but it is not continuous on $(-\infty, 1]$ (the discontinuity is at 0). The part of the proof that failed is the fact that $f^{-1}(V)$ is a union of closed sets, but the infinite union of closed sets need not be closed. \\
+\problempart{c} We proceed as we did in {\bf (a)}. Let $V \subset Y$ be closed and suppose that $\{A_\alpha\}$ is a locally finite collection of closed sets in $X$ with $X = \bigcup_\alpha A_\alpha$. As before we note that 
+\[
+f^{-1}(V) = f^{-1}\left(\bigcup_\alpha (f^{-1}(A_\alpha) \cap V)\right) = f^{-1}\left(\bigcup_\alpha f|_{A_\alpha}(V)\right) 
+\]
+If we set $A = f^{-1}\left(\bigcup_\alpha f|_{A_\alpha}(V)\right) $, then we are left to show that $A$ is closed. We will instead show that the set $X - A$ is open. Choose any $x \in X-A$. Then there is a neighborhood $U$ of $x$ that only intersects finitely many of the $A_\alpha$. Denote this subcollection by $A_1, A_2, \ldots, A_n$. We now use the continuity of $f$ to see that the inverse image $f^{-1}|_{A_i}(V)$ is closed in $A_i$. Because $x \not\in f^{-1}(V)$ there exists some neighborhood $U_i$ such that $U_i \cap A_i = \emptyset$. We then can see that the neighborhood $U \cap U_1 \cap \cdots \cap U_n$ is a finite intersection of open sets, which does not intersect the $A_\alpha$. Hence, $X-A$ is open, and we are done.  
+
+\problem{}
+We need to establish the following \\
+\begin{prop}
+Let $S_\Omega$ denote the smallest well-ordered set as outlined in Munkres. Then for each $\alpha < \Omega$, $S_\alpha$ is order-isomorphic with a subset of the real numbers in the usual order. 
+\end{prop}
+\begin{proof}
+We will construct an order isomorphism via the principle of recursive definition in $S_\Omega$, which is possible because we know that $S_\Omega$ is well ordered. Choose any section $S_\alpha$, and note that by definition such a set is countable. Let us denote is elements by $s_1,s_2, \ldots$. The main observation in this proof is the following
+\begin{lem}
+Any well ordered subset $X \subset \R$ is countable. 
+\end{lem}
+\begin{proof}
+Suppose that $X$ is both uncountable and well ordered. Let $s(x)$ be the successor function on $X$. So $s(x)$ is the smallest element $> x$, which exists because we assumed $X$ was well-ordered. We now define a ``distance'' function $d$ such that $x \mapsto s(x) - x$, which must be greater than 0. We then set $X_n = \{x \in X \suchthat d(x) > 1/n\}$. Then each $X_n$ is countable because for distinct $x,y \in X$ $|x - y| > 1/n$. Next, notice that $X \subset \bigcup_{n\in \Z_+} X_n$ because $d(x) > 0$ for every $x$. But then we must have that $X \subset \bigcup_{n\in \Z} X_n$, which is countable. So $X$ must also be countable. this contradiction establishes the result.
+\end{proof}
+This result would lead us to believe that we should look to a countable set in $\R$ to contain the order preserving isomorphic image. Naturally, we look to subsets of $\Q$. Let $q_1,q_2,\ldots$ be an enumeration of the rationals. We define our isomorphism recursively as follows, start with $f(s_1) = q_1$. If $R$ is the relation in $S_\Omega$, then we choose $f(s_n)$ such that it preserves the order relations in $s_k$ for $k < n$. This is possible because at each step in the iteration of the definition, there are only finitely may constraints, and $\Q$ is both unbounded and dense, so we can place $f(s_n)$ in between $f(s_i)$ and $f(s_j)$, when appropriate. Furthermore, if $s_n R s_k$ for $k < n$ then we can always choose $f(s_n) < f(s_k)$ for all $k < n$ because $\Q$ is unbounded. The same statement holds for $f(s_k) < f(s_n)$. Iterating this process (countably) infinitely many times yields an order preserving isomorphism from $S_\alpha \to Q \subset \Q$ which is at most countable, and we are done. 
+\end{proof}
+\end{document}
+

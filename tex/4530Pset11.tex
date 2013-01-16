@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.5in,rmargin=1.5in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,relsize,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 11}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+
+\DeclareMathOperator{\im}{\text{im}}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\begin{document}
+\problem{9.53.3} Because the map $p$ is a covering map, we have that there must be some covering into slices such that each neighborhood of $b$ is evenly covered. As a result, we must have that there is a local homeomorphism from $S_k \to U_b$ and so $S_k$ can be written as the union of evenly covered open sets. Conversely, set $B = B - S_\ell = B - \bigcup_{j \neq k} S_j$ . We see that each of the rems of the union must be disjoint and non-empty, so that $S_j$ is closed. By assumption $B$ is connected, so the sets that are both open and closed in $b$ can be the whole space. So $S_k = B$ and consequently $p^{-1}(b)$ has $k$ elements for every $b$. 
+
+\problem{9.53.4} This proof is much more clear with a diagram. Given any $z \in Z$ we can find some neighborhood $U_z$ that is evenly covered by $r$. Moreover, because $r^{-1}(U_z)$ is finite it admits a decomposition into disjoint open sets $V_1, \ldots, V_n$ such that $V_j \approx U_z$ for every $j$. We then use the second map to take each of these $V_j$ and find an $j$ such that $r_j\in V_j = r(x_j)$ and neighborhood $W_j$ such that $W_j$ is evenly covered by $q$, because $q$ is a covering map. We then set $V = U_z \cap \left(\bigcup_j r(W_j)\right)$ which is a neighborhood of $z$ that is evenly covered by $p = r \circ q$. Furthermore, $p$ is a covering map because it is the composition of continuous surjective functions, and both properties are preserved under composition.
+
+\problem{9.53.5} We are given the function 
+\begin{align*}
+p: S^1 &\to S^1 \\
+z & \mapsto z^2
+\end{align*}
+To see that this is a covering map we simply recall the fact that $e^{(i\theta)^n} = e^{in\theta}$ whenever the points in $S^1$ are identified with the point $e^{i\theta}$. In this case we have $n = 2$ and so $p$ is polynomial and therefore continuous and it is also surjective because we just take $x = \theta/2$ to get that $p(x) = e^{i\theta}$. For the fibers over each point we have sets that look like $p^{-1}(e^{i\theta}) = \{e^{2\pi i(\theta + k)/2} \suchthat k \geq 0\}$ For each fixed $\theta$ in the interval $[0, 2\pi)$ we take the neighborhood in $S^1$ of $e^{i\theta}$ to be the set of all $\phi$ such that $|\theta - \phi| < \pi / 2$. So that we must have that 
+\[
+p^{-1}(U_{\theta}) = \left\{ e^{i\phi} \suchthat \left|\phi - (\theta + 2\pi ik)/2\right| < \pi / 4\right\}
+\]
+It is then clear that if if $\alpha \neq \beta \in [0, 2\pi)$ then $U_\alpha \cap U_\beta$ is empty. Then we use the fact that each of these maps is continuous to get that $U_\theta \approx p^{-1}(U_\theta)$. So $e^{i\theta}$ has an evenly covered neighborhood for all $\theta$ and so it must be a covering map. 
+
+To generalize to the case $n > 2$. We simply repeat the argument given above. This is still valid because we still have the equality $e^{(i\theta)^n} = e^{in\theta}$ and so we just carry the $n$ throughout the computation. In particular, we get
+\[
+p^{-1}(e^{i\theta}) = \{e^{(\theta + 2\pi im)/n}\}
+\]
+and 
+\[
+p^{-1}(U_{\theta}) = \left\{ e^{i\phi} \suchthat \left|\phi - (\theta + 2\pi ik)/n\right| < \pi / n\right\}
+\]
+
+\problem{9.53.6}
+\problempart{b} Begin with some open cover for $E$, say $E \subset \bigcup_n E_n$. Fix a $b \in B$ and find an open neighborhood $U_b$ about $b$ such that $p^{-1}(U_b) = \bigcup_{j=1}^m A_j$ and each of the $A_j \approx U_b$. We then note that $|A_j \cap p^{-1}(b)| = 1$ because $p$ is a covering map and so there is some element $x_{b,j} \in E_{b,j}$. We then use the fact that $p$ is a covering map to get a neighborhood $N_b = \bigcap_{j=1}^m p(A_j \cap E_j)$, an open neighborhood about $b$. Then, we have found for each $b \in B$ an open neighborhood $N_b$ that contains it, and therefore we have that $B \subset \bigcup_{b \in B} N_b$. By assumption, $B$ is compact so we can extract a finite subcover $\{S_1, \ldots, S_N\}$ whose union is all of $B$. We then observe that $\{p^{-1}(S_1), \ldots, p^{-1}(S_N)\}$ is an open cover of $E$. The final observation is to note that each of the sets $p^{-1}(S_j) \subset \bigcup_{j=1}^m E_{b,j}$ and so $\cup_j p^{-1}(S_j)$ is contained in the union of only finitely many elements of the $E_{b,j}$. Furthermore, we have that this set contains all of $E$, and so we have by transitivity of inclusion that $E$ has a finite subcover, and is therefore compact. 
+
+\problem{9.54.5} See the attached diagram for a sketch. A lifting of $f$ is the map $\tilde{f}(t) = (t,2t)$
+
+\problem{9.54.6} Let $\alpha: [0,1] \to S^1$ be the usual parameterization of the disk in the complex plane given by $\alpha(t) = e^{2\pi it}$. It is clear that $\alpha$ is a loop because $\alpha (0) = \alpha(1) = 1$. We then apply theorem 9.54.5 (cf. pg 345) to get that $[\alpha] \approx 1 \in \Z$ under the identification given by that isomorphism. Now we will consider the function $g_*([\alpha]) = [g \circ \alpha]$. A computation gives that
+\[
+(g \circ \alpha)(t) = g(e^{2\pi it}) = (e^{2\pi it})^n = e^{2\pi int}
+\]
+So we have that $g_*$ is the homomorphism and therefore determined by its value on the generator. The computation above reveals that $g_*(\alpha(t)) = \alpha(nt)$ where the multiplication operation in $\Z$ is usual multiplication (a sequence of additions). An analogous computation gives that $h_*(\alpha(t)) = \alpha(-nt)$. So $g_*([\alpha]) = n$ and $h_*([\alpha]) = -n$. 
+
+\problem{9.54.7} Consider the covering map  $p: \R \times \R \to S^1 \times S^1$ given by $(x,y) \mapsto (\sin2\pi x, \cos2\pi x) \times (\sin2\pi y, \cos2\pi y)$. Let $e$ be the origin $(0,0)$ and $b = p(e) = (0,1) \times (0,1)$. So we have that $p^{-1}(b) = \Z \times \Z$ and because $\R^2$ is simply connected we must also have that the lifting correspondence
+\[
+\varphi: \pi_1(T,b) \to \Z \times \Z
+\]
+is bijective. We need to show that it is in fact an isomorphism. Indeed, choose $\alpha, \beta$ to be two paths in $\pi_1(T,b)$. Let $\tilde{f},\tilde{g}$ denote their liftings to paths in $\R^2$ with endpoints $(a_1,a_2)$ and $(b_1,b_2)$, respectively. We then define the map $\tilde{g}_t = \tilde{g} + (a_1,a_2)$. Now we have a path $\tilde{f} * \tilde{g}_t$ which takes $(0,0)$ to $(a_1+b_1, a_2+b_2)$. The projection of this path onto $T$ is $f*g$ because $p(\tilde{g} + (a_1,a_2)) = p(\tilde{g}) = g$. This precisely means that $\tilde{f}*\tilde{g}_t$ is a lift of the path $f*g$ so that
+\begin{align*}
+\varphi([f][g]) &= \varphi([f*g]) \\
+&= (a_1+b_1, a_2+b_2) \\
+&= (a_1,a_2) + (b_1,b_2)\\
+&= \varphi([f]) + \varphi([g])
+\end{align*}
+And so $\varphi$ is a bijection and the proof is complete. 
+
+\problem{9.54.8} We have that $p$ is a covering map. By definition, this means that $p$ is surjective open and continuous. We are only left to verify that $p$ is injective. Indeed, we choose any $b \in B$ and then pick two elements $x,y \in p^{-1}(b)$ such that their inverse images agree. That is, $p(x) = p(y)$. Because $E$ is connected, we know that there must be some path $\alpha$ in $E$ such that $\alpha(0) = x$ and $\alpha(1) = y$. We can now make a loop in $B$ by composing the maps to get $\ell = p \circ \alpha$, and moreover this loop is based at the point $b$. Because $B$ is simply conneced we know that the fundamental group $\pi_1(B,b)$ is the trivial group, and so $\ell$ is homotopic to the constant loop. We now apply theorem 9.54.3 to get that the liftings $\tilde{\ell}$ and $\tilde{e}$ (the constant loop) are path-homotopic. As a result of this we have that $\tilde{\ell}(1) = \tilde{e}(1)$. But we know that $\tilde{\ell} = \alpha$ so we must have that $x = y$. This proves that $p$ is injective and we are done. 
+
+\end{document}

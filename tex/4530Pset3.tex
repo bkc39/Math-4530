@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,fancyhdr,parskip,graphicx}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 4530 Problem Set 3}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{|}}
+\DeclareMathOperator{\of}{\mathrel{\circ}}
+
+\DeclareMathOperator{\interior}{\text{Int}}
+\DeclareMathOperator{\bd}{\text{Bd}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+\DeclareMathOperator{\hookta}{\lhook\joinrel\xrightarrow{\ \ \ \ }}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{claim}{Claim}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prop}{Proposition}
+
+\begin{document}
+
+\problem{2.19.10}
+\problempart{a} We want to find a topology $\mathcal{T}$ on $A$ which has the fewest open sets such that each $f_\alpha$ is continuous with respect to $\mathcal{T}$. Let $\mathcal{C}$ be the collection of all such topologies on $A$, more precisely define
+\[
+\mathcal{C} = \{\overline{\mathcal{T}} \suchthat \forall \alpha, f_\alpha \text{ is continuous relative to } \overline{\mathcal{T}}\}
+\]
+We can see that $\mathcal{C} \neq \emptyset$ because the discrete topology must be in $\mathcal{C}$ because every set is open. We then set 
+\[
+\mathcal{T} = \bigcup_{\overline{\mathcal{T}} \in \mathcal{C}} \overline{\mathcal{T}}
+\]
+It is clear that $\mathcal{T}$ is a topology because $\emptyset, A \in \mathcal{T}$ because they are in each $\overline{\mathcal{T}}$. Furthermore, any countable union of open sets in $\mathcal{T}$ is open because this union must be open in each of the $\overline{\mathcal{T}}$. The argument is analogous for finite intersections. Finally, we can see that $\mathcal{T}$ is the coarsest because it is coarser than each of the $\overline{\mathcal{T}}$. The uniqueness of $\mathcal{T}$ follows from the fact that if $\mathcal{T}'$ was another topology as coarse as $\mathcal{T}$, but was not equal to $\mathcal{T}$ then we would have that $\mathcal{T} \cap \mathcal{T}'$ is coarser than both, but this is impossible because $\mathcal{T}$ was the coarsest topology on $A$. 
+
+\problempart{b} We define 
+\[
+\mathcal{S}_\beta = \{f^{-1}_\beta(U_\beta) \suchthat U_\beta \text{ is open in } X_\beta\}
+\]
+And let $\mathcal{S} = \bigcup \mathcal{S}_\beta$. We want to show that $\mathcal{S}$ is a subbasis for $\mathcal{T}$ as defined in part {\bf (a)}. For each $S \in \mathcal{S}$ we must have that $S \in \mathcal{T}$ because $S = f^{-1}_\beta(U_\beta)$ and $f_\beta$ is continuous relative to $\mathcal{T}$ for every $\beta$. Hence, $\mathcal{T}$ must contain all unions of sets in $\mathcal{S}$, and all finite intersections of sets in $\mathcal{S}$ because it is a topology. The coarsest topology satisfying these properties is $\mathcal{T}$, so $\mathcal{S}$ is a subbasis for $\mathcal{T}$.
+
+\problempart{c} We need to show that $g: Y \to A$ is continuous relative to $\mathcal{T}$ if and only if each map $f_\alpha \of g$ is continuous relative to $\mathcal{T}$. In the forward direction we have that $g$ is continuous. But then $f_\alpha \of g$ is the composition of continuous maps, and is therefore continusous. In the reverse direction, suppose that $f_\alpha \of g$ is continuous for each $\alpha$. then for each open set $U_\alpha \in X_\alpha$ we have that the inverse image $(g^{-1} \of f_\alpha^{-1})(U_\alpha)$ is open. Observe that because each of the $f_\alpha$ is continuous relative to $\mathcal{T}$ we have that $g^{-1}(f_\alpha^{-1}(U_\alpha))$ is open. So the inverse image of any subbasis element under $g$ is open. But because we can write any open set $\mathcal{O} \subset A$ as the union of finite intersections of subbasis elements such as $\bigcup_\beta \bigcap_{k=1}^n f^{-1}_{\beta,n} (U_{\beta,n})$ we know that the inverse image of any open set in $A$ is open. So $g$ must be continuous. 
+
+\problempart{d} Choose any open set $U \subset A \in \mathcal{T}$ and some element $x = f(u) \in f(U)$. Because $U$ is open we can find some basis element $B \in \mathcal{T}$ such that $u \in B \subset U$. Moreover, we must have that $B = \bigcap_{k=1}^n f^{-1}_{\alpha_k}(V_{\alpha_k})$, because the sets $f^{-1}_\beta(V_\beta)$ form a subbasis for $A$ and the $V_{\alpha_k}$ are open in $X_{\alpha_k}$. For all other $\alpha$ we set $V_\alpha = X_\alpha$. Then we have that $V = f^{-1}(\prod_\alpha V_\alpha)$ and therefore $f(B) = f(A) \cap \prod_\alpha V_\alpha$ is open in the subspace topology. We can see this because only finitely many of the $V_\alpha \neq X_\alpha$. Moreover, $x \in f(B) \subset f(U)$ so $f(U)$ is open because $x$ was arbitrary.   
+
+\problem{2.20.4}
+\problempart{a} We consider each function separately.
+\begin{enumerate}
+\item For the function $f: t \mapsto (t,2t,3t,\ldots)$ we can see that each component is linear, and hence continuous (the inverse image of the interval $(a,b)$ is $(a/k, b/k)$), and so $f$ in continuous in the product topology. In the uniform topology we consider the neighborhood $B_{\overline{\rho}}(\epsilon, 0)$, which is the intersection of a sequence of descending neighborhoods about 0, and hence it is equal to $0$, and as a result $f$ is not continuous. In the box topology observe that the open set $\mathcal{O} = \prod_{k=1}^\infty (-1/k^2, 1/k^2)$, has preimage $\{0\}$ as well, so $f$ is not continuous relative to the box topology.
+\item Next we consider $g: t \mapsto (t,t,t\ldots)$. Again, each of the component functions is linear, and hence continuous, so that $g$ is continuous in the product topology. In the uniform topology we choose $\epsilon > 0$ and $x \in \R$. Then if $d(x,y) < \epsilon$ we must have that $d_{\overline{\rho}}(g(x), g(y)) = d(x,y) < \epsilon$,  therefore $g$ is continuous. In the box topology, we consider the same $\mathcal{O}$ as above, and note that the preimage of $\mathcal{O}$ under $g$ is $\{0\}$, so $g$ is not continuous in this topology. 
+\item Finally we consider $h: t\mapsto (t, t/2, t/3,\ldots)$. As before, each of the component functions is continuous and so $h$ is continuous in the product topology. In the uniform topology we note that $d_{\overline{\rho}}(h(x),h(y)) = d(x,y)$ because that is the usual distance in the Euclidean metric in the first component, which is the largest. If we take $d(x,y) < \epsilon$ for any choice of $\epsilon$ we have that $h$ is continuous in the uniform topology. Lastly, we note that $h^{-1}(\mathcal{O}) = \{0\}$, again. And therefore $h$ is not continuous in the box topology. 
+\end{enumerate}
+
+\problempart{b} 
+\begin{enumerate}
+\item We begin by considering the sequences $w_n$ for $n = 1,2,3,\ldots$ In the product topology each of the sequences clearly converge (to $\vec{0}$), because every neighborhood of zero will contain all but finitely many of the $w_n$. In the uniform topology this sequence does not converge. Consider the ball $B_{\overline{\rho}}(\epsilon, x)$ in the uniform topology. If $\epsilon < 1$ then $B_{\overline{\rho}}(\epsilon, x)$ can contain at most one point of $w_n$. And it cannot converge in the box topology, because the box topology is finer than the uniform topology.
+\item For the sequence $x_n$ we begin with the uniform topology and note that the distance in the uniform metric from $\vec{0}$ goes to zero because it decreases at the rate of the harmonic sequence $1/k$ which goes to 0 as $k \to \infty$. That is, $d_{\overline{\rho}}(x_n, 0) = 1/n$ which goes to 0 as $n \to \infty$. Because $x_n$ converges in the uniform topology, it must also converge in the product topology, because the product topology is coarser. Finally, in the box topology $x_n$ does not converge because the open set $\mathcal{O}$ about 0 does not contain any point of $x_n$, and clearly $x_n$ cannot converge elsewhere. 
+\item The sequence $y_n$ is similar. It converges in the uniform topology because the supremum distance of any coordinate from $0$ is $1/n$, which goes to $0$ as $n \to \infty$. Likewise, it must also converge in the product topology because the product topology is coarser. Lastly, we look at $\mathcal{O}$ in the box topology, and again note that $\mathcal{O}$ does not contain any points of $y_n$.
+\item The sequence $z_n$ does actually converge in the box topology because any neighborhood of zero all but perhaps the first two coordinates of $z_n$. However, because the harmonic sequence goes to 0, the first to components of all but finitely many of the $z_n$ are contained in a neighborhood of $0$. Hence, $z_n$ converges in the box topology. Because both the product and uniform topologies are coarser than the box topology, we have that $z_n$ must converge in these two topologies as well. 
+\end{enumerate} 
+
+\problem{2.20.5} 
+\indent Intuitively, the closure of the set of sequences that are eventually zero should be the set of sequences that are 0 ``at infinity''. So we are looking for the limit points of $\R^\infty$, which should be the set of sequences that converge to 0 in the uniform topology. Consider any such limit point $\ell \in \R^\omega$. Because $\ell$ is a limit point, given any $\epsilon > 0$ the ball $B_{\overline{\rho}}(\epsilon, \ell)$ must contain a point of $\R^\infty$ other than $\ell$. which means that for all but finitely many $k$, $|x_k| < \epsilon$. This is precisely what it means for the sequence $x_k \to 0$. Hence, the set of sequences that converge to 0 is the closure of $\R^\infty$ in the uniform topology.   
+
+\problem{2.20.8}
+\problempart{a} We will break this part down into two claims. The first one being \\
+\begin{claim}
+The $\ell^2$-topology is coarser than the box topology on $\R^\omega$, i.e. $\text{box topology} \supset \ell^2\text{-topology}$.
+\end{claim}
+\begin{proof}
+Fix $\epsilon > 0$ and consider the collection of balls $\mathcal{B} = \{B_{\ell^2}(\epsilon, x) \suchthat x \in X\}$. For each $B_{\ell^2}(\epsilon, x)  \in \mathcal{B}$ we need to find an open set in the box topology that contains $B_{\ell^2}(\epsilon, x)$. Consider the set 
+\[
+\mathcal{D} = \prod_{n=1}^\infty (x - \sqrt{\epsilon}/2, x + \sqrt{\epsilon}/2)
+\]
+It is clear that $\mathcal{D}$ is open in the box topology. Furthermore for any point in $\mathcal{D}$ we can see that the distance in the $\ell^2$ metric is less than $\epsilon$ (differences are geometric series). Hence, the $\ell^2$-topology is coarser than the box topology. 
+ \end{proof}
+
+We then need to show the following\\
+\begin{claim}
+The $\ell^2$-topology is finer than the uniform topology on $\R^\omega$, i.e. $\ell^2\text{-topology} \supset \text{uniform topology} $.
+\end{claim}
+\begin{proof}
+Begin again by fixing an $\epsilon > 0$ and consider all balls of the form $B_{\overline{\rho}}(\epsilon, x)$ where $x \in X$. We will show that for each such ball, the ball $B_{\ell^2}(\epsilon, x) \subset B_{\overline{\rho}}(\epsilon, x)$, which verifies the claim. This is clear if we consider any point $y \in B_{\ell^2}(\epsilon, x)$, then we must have that 
+\[
+\left(\sum_{i=1}^\infty (x_i - y_i)^2\right)^{1/2} < \epsilon
+\]
+But in order for this to be true we must also have that $\sup_i \{(x_i - y_i)\} < \epsilon$ because otherwise the above inequality would not hold. But this means that $y \in B_{\overline{\rho}}(\epsilon, x)$, and we are done. 
+\end{proof}
+\problempart{b} We will go up the chain of increasing fine-ness. To see that the product topologies and the uniform topologies are different we consider any product neighborhood of $\vec{0} = (0, 0, \ldots)$. Any  such neighborhood must contain the point $\vec{0} + \epsilon_i = (0,0,.\ldots, \epsilon, 0,\ldots)$, which has $\epsilon$ in the $i^{th}$ coordinate, for sufficiently large $i$. However, the ball $B_{\overline{\rho}}(\epsilon, 0)$ does not, so the topologies must differ. Next, we compare the uniform and the $\ell^2$ topologies. Pick an $\epsilon > 0$ and look at the ball $B_{\ell^2}(\epsilon, 0)$. With this $\epsilon$ in mind, choose a $\delta > 0$ corresponding to the ball $B_{\overline{\rho}}(\delta, 0)$. We then want to compare the two balls. Find an integer $k$ such that $k\delta/2 > \epsilon$ and consider the point 
+\[
+z = (\overbrace{\delta/2, \delta/2, \ldots,}^{\text{first }n^2\text{ components}}0,0,0,\ldots)
+\]
+Then $z \in B_{\overline{\rho}}(\delta, 0)$ but $z \not\in B_{\ell^2}(\epsilon, 0)$. We proceed to the comparison of the $\ell^2$ and the box topologies. We consider the usual set $\mathcal{O} = \prod_{k=1}^\infty (-1/k^2, 1/k^2)$ about 0 in the box topology and the ball $B_{\ell^2}(\epsilon, 0)$ for every $\epsilon > 0$. Then we have that the vector $0 + (\epsilon/2)_i$ is contained in $B_{\ell^2}(\epsilon, 0)$ for sufficiently large $i$, but for these same large $i$ this vector is not contained in $\mathcal{O}$. 
+
+\problempart{c} We are considering the Hilbert cube 
+\[
+H = \prod_{n \in \Z^+} [0, 1/n]
+\]
+and the four topologies that it inherits as a subspace of $X$. We will show that there are only two distinct topologies on the cube by proceeding in steps. The first is the following \\
+\begin{claim}
+The $\ell^2$ and box topologies on $H$ are distinct. 
+\end{claim}
+\begin{proof}
+We begin by considering our usual open set $\mathcal{O} = \prod_{k=1}^\infty (-1/k^2, 1/k^2)$ in the box topology. Unfortunately, $\mathcal{O}$ does not lie in $H$, but we can construct a similar set $\mathcal{O}_H = \prod_{n\in \Z^+} [0, 1/2^k)$ as the neighborhodd of zero that we look at in the box topology. Fix any $\epsilon > 0$ and observe that the ball $B_{\ell^2}(\epsilon,0)$ contains the point 
+\[
+p = (\frac{\sqrt{6}}{2\pi}\epsilon, \frac{\sqrt{6}}{4\pi}\epsilon, \ldots, \frac{\sqrt{6}}{2k\pi}\epsilon, \ldots)
+\]
+This choice of $p$ is motivated by the fact that in the $\ell^2$ metric $d(p,0) = \epsilon/2$, which means that $p$ is not contained in the neighborhood $\mathcal{O}_H$ because the sequence $1/2^k$ decreases too rapidly. Hence, the two topologies on $H$ are different. 
+\end{proof}
+
+A somewhat more surprising fact is the following\\
+\begin{claim}
+The product, uniform, and $\ell^2$ topologies are equivalent on $H$. 
+\end{claim}
+\begin{proof}
+We begin by noting that the usual ordering of these topologies by inclusion is
+\[
+ \ell^2 \subset \text{uniform} \subset \text{product}
+\]
+Hence, if we can show that $\text{product} \subset \ell^2$ we will have the equivalence of the three topologies on $H$. To do this we begin by picking an $\epsilon > 0$ and a point $x \in H$. With $\epsilon$ in mind we find a $\delta > 0$ such that $\delta < \epsilon^2$ and observe that because the series $\sum_{k=1}^\infty 1/k^2$ converges we can use the Cauchy criterion to find an $N$ large enough that 
+\[
+\sum_{k=N}^\infty 1/k^2 < \delta
+\]
+
+We then pick $\alpha < \epsilon^2 - \delta$ and observe that the neighborhood 
+\[
+\mathcal{N} = \left(\prod_{i=1}^{N-1} (x - \frac{\sqrt{\alpha}}{\sqrt{N - 1}}, x + \frac{\sqrt{\alpha}}{\sqrt{N - 1}})\right) \times \left(\prod_{i = N}^\infty [0, 1/n]\right)
+\]
+is in the product topology and contains the point $x$. By our choices of $\epsilon, \delta$ and $\alpha$ we have that for any point $y\in \mathcal{N}$ that $d_{\ell^2}(x,y) < \epsilon$, and so our product neighborhood is contained inside the $\ell^2$ ball $B_{\ell^2}(\epsilon, 0)$. As a result, we have that the product topology is finer than the $\ell^2$ topology and we are done. 
+\end{proof}
+\problem{2.21.3}
+\problempart{a} We have the function $\rho$, and need to verify that the axioms for a metric are satisfied. Before we proceed we note that $\rho$ is well-defined because the product is finite. To see that $\rho(x,y) \geq 0$ we observe that $\rho(x,y) \geq d_k(x,y) \geq 0$ because $d_k$ is a valid metric for each $k$. We can see that equality holds iff $x = y$ because equality holds for each $d_k$ iff $x = y$. To observe that $\rho(x,y) = \rho(y,x)$ observe that $\rho = d_k$ for some $k$ and that $d_k(x,y) = d_k(y,x)$. Finally, the triangle inequality follows from the triangle inequality from each $d_k$ because we have that $\rho(x,z) = \max_k\{d_k(x,z)\} \leq \max_k\{d_k(x,y) + d_k(y,z)\}$ and so we are done. 
+
+\problempart{b} We appeal to Theorem 20.1 to see that $\overline{d}_i$ is a metric on $X_i$ for each $i$. Then we can see that $\overline{d}_i/i$ is a metric on $x_i$ by seeing that $\overline{d}_i/i$ is clearly non-negative and that $\overline{d}_i(x,y)/i = 0$ implies that $\overline{d}_i(x,y) = 0$ which only happens when $x=y$. To see symmetry observe that $\overline{d}_i(x,y)/i = \overline{d}_i(y,x)/i$ because $\overline{d}_i(x,y) = \overline{d}_i(y,x)$. For the triangle inequality we see that 
+\[
+\overline{d}_i(x,z)/i \leq 1/i(\overline{d}_i(x,y) + \overline{d}_i(y,z)) = \overline{d}_i(x,y)/i + \overline{d}_i(y,z)/i
+\]
+Then the metric $D(x,y) = sup\{\overline{d}_i(x,y)/i\}$ is well-defined and enjoys the properties of each individual metric (analogous to the last problem), and is therefore a valid metric on the product space. 
+
+\problem{2.22.2}
+\problempart{a} It is clear that $f$ serves a right inverse for $p$, and so we know that $p$ is surjective. Because it is also continuous, we need to see that the open saturated sets in $X$ are sent onto open sets in $Y$. Choose a set $\mathcal{O}_X = p^{-1}(\mathcal{O}_Y)$. Then we have that
+\[
+f^{-1}(\mathcal{O}_X) = f^{-1}(p^{-1}(\mathcal{O}_Y)) = \mathcal{O}_Y
+\]
+So $\mathcal{O}_X$ is open because $f$ is continuous.
+
+\problempart{b} The canonical inclusion mapping is a continuous right inverse for the $r$, which we know is continuous by definition. So $r$ must be a quotient map.
+
+\problem{2.22.4}
+\problempart{a} Following the hint, we consider the map $g: (x \times y) \mapsto x + y^2$. Note that $g: X^* \to \R$. Note that $g$ is a quotient map because the set $U$ is open in $\R$ if and only if $g^{-1}$ is open in $\R^2$. Geometrically, $g^{-1}$ is a collection of left-facing parabolas.  We then apply Corollary 22.3 to see that $X^*$ is homeomorphic to $\R$. Alternatively, one could look at $g$ as mapping $X^*$ to the plane so that $(i \of g)(x \times y) = (x + y^2, 0)$. Then $g$ is a retraction and therefore a quotient map. And we again see that $X^*$ is homeomorphic to $\R$. 
+
+\problempart{b} We proceed similarly to ${\bf (a)}$ using the map $g(x \times y) = x^2 + y^2$. In this case the retraction view of $g$ is more illuminating because we can wee that $(x^2 + y^2, 0)$ is homeomorphic to the positive reals under the projection onto the first coordinate. 
+
+\problem{}
+
+\end{document}
